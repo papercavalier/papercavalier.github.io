@@ -19,6 +19,8 @@ You are an open source advocate.
 
 Contact us at [jobs@papercavalier.com][3] with resume and GitHub URL to join.
 
+![sc][4]
 [1]: http://techcrunch.com/2010/12/24/hybrid-startup/
 [2]: http://www.nearfine.com/
 [3]: mailto:jobs@papercavalier.com
+[4]: /images/sc.jpg
