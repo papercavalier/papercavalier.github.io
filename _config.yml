@@ -1,0 +1,3 @@
+markdown: rdiscount
+server:   true
+auto:     true
