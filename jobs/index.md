@@ -2,9 +2,11 @@
 layout: default
 title: Minimum Viable Job Posting
 ---
-We are in the [hybrid business][1] of reinventing shopping online.
+![sc][1]
 
-In 2008, we built [Near Fine][2], a book-dealing algorithm that trades on Amazon. It buys and sells fluidly across countries, from the US to Europe to Japan. It has weathered the subprime slump and the death of print, doubling revenue yearly.
+We are in the [hybrid business][2] of reinventing shopping online.
+
+In 2008, we built [Near Fine][3], a book-dealing algorithm that trades on Amazon. It buys and sells fluidly across countries, from the US to Europe to Japan. It has weathered the subprime slump and the death of print, doubling revenue yearly.
 
 Currently, we are turning our existing business model inside-out to build a product search site that doesn’t suck. Our algorithm is the first customer.
 
@@ -16,10 +18,9 @@ You are an experienced Ruby and JavaScript developer. You know how to build and 
 
 You are an open source advocate.
 
-Contact us at [jobs@papercavalier.com][3] with resume and GitHub URL to join.
+Contact us at [jobs@papercavalier.com][4] with resume and GitHub URL to join.
 
-![sc][4]
-[1]: http://techcrunch.com/2010/12/24/hybrid-startup/
-[2]: http://www.nearfine.com/
-[3]: mailto:jobs@papercavalier.com
-[4]: /images/sc.jpg
+[1]: /images/sc.jpg
+[2]: http://techcrunch.com/2010/12/24/hybrid-startup/
+[3]: http://www.nearfine.com/
+[4]: mailto:jobs@papercavalier.com
