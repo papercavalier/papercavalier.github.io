@@ -2,7 +2,6 @@
 layout: default
 title: Minimum Viable Job Posting
 ---
-
 We are in the [hybrid business][1] of reinventing shopping online.
 
 In 2008, we built [Near Fine][2], a book-dealing algorithm that trades on Amazon. It buys and sells fluidly across countries, from the US to Europe to Japan. It has weathered the subprime slump and the death of print, doubling revenue yearly.
