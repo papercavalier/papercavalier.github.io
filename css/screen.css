@@ -5,3 +5,9 @@
 #two {
   background: #333;
 }
+
+a {
+  font-size: 6em;
+  margin: 10px;
+  color: #000;
+}
