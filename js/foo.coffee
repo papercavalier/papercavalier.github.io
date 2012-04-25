@@ -18,3 +18,21 @@ $ ->
     , 400
 
     event.preventDefault()
+
+  $.fn.highlight = ->
+    offset = $(window).scrollTop() + $(window).height() * 0.375
+
+    @each ->
+      doc    = $(@)
+      top    = doc.offset().top
+      bottom = top + doc.height()
+
+      if offset > top and offset < bottom
+        unless doc.css('opacity') is 1
+          doc.stop().animate(opacity: 1, 100)
+      else
+        unless doc.css('opacity') is 0.1
+          doc.stop().animate(opacity: 0.1, 100)
+
+  $(window).scroll ->
+    $('#three .text p').highlight()
