@@ -1,151 +1,75 @@
-function Hokusai ($index, $pos) {
-	var index = $index;
+function Hokusai (index, pos, width) {
+	var index = index;
 	var scope  = this;
-	var drag = .98;
-	var homeforce = .05;
-	var mouseforce = .4;
-	var mouseforcerange = 34;
-	//var topspeed = 10;
+	var width = width;
+	
 
-	var mouseZ = 0;
-	var seed = Math.random();
-	var counter = 0;
-	//var type, velocity;
-
-	//Vector3
-	var loc, acceleration, vel, homedir, dir, newLoc;
-
-	var w = 10;
-	var h = 30;
-	var steps=10;
-	var fold = new THREE.Vector3 ((Math.random()-.5)*2+.3,Math.random()+.3,(Math.random()-.5)*2+.3);
-
-	var geometry;
-
-	var homePos = new THREE.Vector3($pos.x+seed*100-50, $pos.y, $pos.z);
-	loc = homePos;
-
-	acceleration = new THREE.Vector3(-0.001, 0.02, 0.01);
-	vel = new THREE.Vector3(0.2, 0.4, 0.2);
-
-
-	this.update = function update (mouseX, mouseY) {
-
-			//this.draw();
-
-
-			 drag = .98;
-			var mouse = new THREE.Vector3 (mouseX, mouseY, mouseZ);
-
-
-			dir = new THREE.Vector3 ();
-			dir.sub(mouse, loc);
-
-			homedir = new THREE.Vector3();
-			homedir.sub(homePos,loc);
-
-
-			if(dir.length() < mouseforcerange){
-				  dir.normalize();
-				  dir.multiplyScalar(mouseforce);
-				  acceleration = dir;
-				  vel.addSelf(acceleration);
-			} else {
-				 homedir.normalize();
-				 homedir.multiplyScalar(homeforce);
-				 vel.addSelf(homedir);
-
-			}
-
-			/*if (homedir.length() < .06 && vel.length() < .06){
-				newLoc = new PVector(random(10)-5, random(10)-5, random(10)-5);
-				newLoc.add(home);
-				home = newLoc;
-				loc = home;
-
-			}*/
-		   // velocity =  vel.length();
-			//vel.limit(vel, topspeed);
-
-			vel.multiplyScalar(drag);
-
-			loc.addSelf(vel);
-
-			this.position.x = loc.x;
-			this.position.y = loc.y;
-			this.position.z = loc.z;
-
-
-
-
-	}
 
 	this.draw = function (width){
 
 		w = width;
-		//GEOMETRY
-		geometry = new THREE.Geometry();
+		
+		//sheet of A4
+		v3( -w/2,     0,  0 );
+		v3(  w/2,     0,  0 );
+		v3(  w/2, w*1.41,  0 );
+		v3( -w/2, w*1.41,  0 );
 
-		var v = new THREE.Vector3 (0,0,0);
-		//fold.y = Math.sin(counter)*10;
-		createNewPoint(v);
 
+
+//flexible paper sheets
+//fold.y = Math.sin(counter)*10;
+
+		/*
 		var vStart = v;
 		for (var k = 0; k <steps; k++){
 			fold.z = k/steps*h/steps;
 			//fold.normalize();
 			//fold.multiplyScalar(h/steps);
 			v.addSelf(fold);
-			createNewPoint(v);
+			v3(v);
 		}
 
 		v.x = v.x -w;
-		createNewPoint(v);
+		v3(v);
 
 		for (var k = 0; k < steps; k++){
 			fold.z = (9-k)/steps*h/steps;
 			//fold.normalize();
 			//fold.multiplyScalar(h/steps);
 			v.subSelf( fold);
-			createNewPoint(v);
+			v3(v);
 		}
 
 		v.x = vStart.x+w;
 		v.y = vStart.y;
 		v.z = vStart.z;
-		createNewPoint(v);
+		v3(v);*/
+		
 
-		this.position.x = index*12-60;
+
+
+		f3(0,1,2);
+		f3(0,2,3);
+
+
+		//this.computeCentroids();
+		this.computeFaceNormals();
 	}
 
-	function createNewPoint (v){
-			vertex = new THREE.Vector3();
-			vertex.x = v.x;
-			vertex.y = v.y;
-			vertex.z = v.z;
-			geometry.vertices.push( vertex );
+	function v3 (x,y,z){
+			scope.vertices.push( new THREE.Vector3(x,y,z));
 		}
-	//creates flat circle material = particle
-	/*var PI2 = Math.PI * 2;
-	var material = new THREE.vertexCanvasMaterial( {
-
-		color: 0xffffff,
-		program: function ( context ) {
-
-			context.beginPath();
-			context.arc( 0, 0, 1, 0, PI2, true );
-			context.closePath();
-			context.fill();
-
+	function f3 (a,b,c){
+			scope.faces.push( new THREE.Face3(a,b,c) );
 		}
-
-	} );*/
-
+	
 
 	//SETUP
-	this.draw(w);
-	THREE.Line.call( scope, geometry, new THREE.LineBasicMaterial( { color: 0xffffff, opacity: 0.5} ));
+	THREE.Geometry.call( this );
+	this.draw(width);
+
 }
 
-Hokusai.prototype = new THREE.Line();
+Hokusai.prototype = new THREE.Geometry();
 Hokusai.prototype.constructor = Hokusai;
