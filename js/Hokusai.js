@@ -1,11 +1,8 @@
-function Hokusai (index, pos, width) {
-	var index = index;
+function Hokusai (width) {
 	var scope  = this;
-	var width = width;
+	var w = width;
 	
-
-
-	this.draw = function (width){
+	this.draw = function (){
 
 		w = width;
 		
@@ -67,7 +64,7 @@ function Hokusai (index, pos, width) {
 
 	//SETUP
 	THREE.Geometry.call( this );
-	this.draw(width);
+	this.draw();
 
 }
 

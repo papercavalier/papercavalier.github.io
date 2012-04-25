@@ -1,5 +1,10 @@
 var mouse2D = { x: 0, y: 0 },
 
+PARTICLES_COUNT = 10, 
+SHEET_WIDTH = 10,
+DRAG = .95,
+GRAVITY = .034,
+
 SCREEN_WIDTH = window.innerWidth,
 SCREEN_HEIGHT = window.innerHeight,
 SCREEN_WIDTH_HALF = SCREEN_WIDTH  / 2,
@@ -31,7 +36,7 @@ function init() {
   projector = new THREE.Projector();
 
   renderer = new THREE.CanvasRenderer();
-  //renderer = new THREE.WebGLRenderer({antialias: true });
+
   renderer.sortObjects = false;
   renderer.setSize( window.innerWidth, window.innerHeight );
 
@@ -40,34 +45,19 @@ function init() {
   theta = 0;
   counter = 0;
 
- /* var directionalLight = new THREE.DirectionalLight( Math.random() * 0xffffff );
-  directionalLight.position.x = Math.random() - 0.5;
-  directionalLight.position.y = Math.random() - 0.5;
-  directionalLight.position.z = Math.random() - 0.5;
-  directionalLight.position.normalize();
-  scene.add( directionalLight );
-
-  var geo = new THREE.PlaneGeometry(50,50, 20, 20 );
-  intersectionPlane = new THREE.Mesh( geo, new THREE.MeshBasicMaterial( { color: 0x888888 } ) );
- // scene.add(intersectionPlane);
-
-  var sphere = new THREE.SphereGeometry(10);
-  intersectionObj = new THREE.Mesh( sphere , new THREE.MeshBasicMaterial( { color: 0x123445 } ) );
-  //scene.add(intersectionObj);
-
-  sphere = new THREE.SphereGeometry(12);
-  mouseObj = new THREE.Mesh( sphere , new THREE.MeshBasicMaterial( { color: 0xff0000,  wireframe: true, doubleSided: true , blending: THREE.AdditiveBlending }) );
-  //scene.add(mouseObj);*/
-
-
   var Particle = function () {
     this.position = new THREE.Vector3();
     this.velocity = new THREE.Vector3();
     this.rotation = new THREE.Vector3();
-    var _seed = Math.random();
-    this._goal = new THREE.Vector3 (100,0,0)
+    this.seed = Math.random();
+    this.goal = new THREE.Vector3 (100,0,0);
+    this.running = false;
+    this.ID =0;
+
+    var  _width = 500, _height = 500, _depth = 200;
     var _acceleration = new THREE.Vector3();
     var _maxSpeed = 4;
+    var _avoidWalls = true;
 
     this.setGoal = function ( target ) {
 
@@ -75,11 +65,25 @@ function init() {
 
     }
 
+    this.setWorldSize = function ( width, height, depth ) {
+
+      _width = width;
+      _height = height;
+      _depth = depth;
+
+    }
+
+    this.setAvoidWalls = function ( value ) {
+
+      _avoidWalls = value;
+
+    }
+
     this.flock = function ( boids ) {
 
       //if ( _goal ) {
 
-      _acceleration.addSelf( this.reach( this._goal, 0.005*_seed ) );
+      _acceleration.addSelf( this.reach( this._goal, 0.0001)); //0.005) );
 
       //}
 
@@ -88,21 +92,6 @@ function init() {
       //_acceleration.addSelf( this.separation( boids ) );
 
     }
-
-  /*  this.repulse = function ( target ) {
-
-      var distance = this.position.distanceTo( target );
-
-     if ( distance < 150 ) {
-        console.log("distance < 150")
-        var steer = new THREE.Vector3();
-
-        steer.sub( this.position, target );
-        steer.multiplyScalar( 0.5 / distance );
-
-        _acceleration.addSelf( steer );
-      }
-    }*/
 
     this.reach = function ( target, amount ) {
 
@@ -116,7 +105,6 @@ function init() {
     }
 
     this.move = function () {
-
       this.velocity.addSelf( _acceleration );
       var l = this.velocity.length();
 
@@ -124,47 +112,177 @@ function init() {
 
         this.velocity.divideScalar( l / _maxSpeed );
       }
+      this.velocity.multiplyScalar(DRAG);
+
       this.position.addSelf( this.velocity );
       _acceleration.set( 0, 0, 0 );
-
+      
     }
+    this.gravitate = function () {
+      _acceleration.addSelf (new THREE.Vector3(0,-GRAVITY,0));
+    }
+
+    this.PerlinMovement = function () {
+
+      var x = this.position.x % SCREEN_WIDTH; 
+      var y = this.position.y % SCREEN_HEIGHT;
+
+      var size = 10;  // pick a scaling value
+      var px = PerlinNoise.noise( size*x, 1, .1);
+      var py = PerlinNoise.noise( 1, size*y, .1);
+
+      var speed = .2;
+
+      //console.log("px: "+ px + " py: "+py);
+
+      _acceleration.addSelf(new THREE.Vector3((px-.5)*speed, (py-.5)*speed , 0));
+    }
+
+    this.turbulence = function () {
+      //circular movement
+      //_acceleration.addSelf( 0,0, 0 );
+     var timeOffset = this.seed * Math.PI*2;
+     var speed = 1;
+     var driver = (timeOffset+counter)/speed;
+     //blow particles up
+     _acceleration.set(Math.sin(driver)/2, Math.cos(driver)/2+1, 0);
+     // _acceleration.multiplyScalar( 1);
+    }
+
+    this.setblowAway = function (value) {
+      this.blowAway = value;
+    }
+
     this.rotate = function () {
-      this.rotation.x += (Math.sin(counter/10)*_seed+_seed/2)/2;
-      this.rotation.y += (Math.sin(counter/10)*_seed+_seed/2)/2;
-      this.rotation.z += (Math.sin(counter/10)*_seed+_seed/2)/2;
+      this.rotation.x += .01;
+      this.rotation.y += .01;
+      this.rotation.z += .01;
+    }
+
+    this.PerlinRotate = function () {
+      // doesn't work
+      var x = this.position.x % SCREEN_WIDTH; 
+      var y = this.position.y % SCREEN_HEIGHT;
+      //console.log("PerlinRotate: x: "+x + " y: "+y);
+      var size = 100;  // pick a scaling value
+      var rx = PerlinNoise.noise( size*x, 1, .1);
+      var ry = PerlinNoise.noise( 1, size*y, .1);
+     //console.log("PerlinRotate: rx: "+rx + " ry: "+ry);
+      var speed =.09; //*this.velocity;
+
+      this.rotation.x += rx*speed;//(Math.sin(counter/10)*_seed+_seed/2)/2;
+      this.rotation.y += ry*speed;;//(Math.sin(counter/10)*_seed+_seed/2)/2;
+      //this.rotation.z += speed * Math.sin(counter/10)*this.seed+this.seed/2);
 
     }
+
+    this.followMouse = function () {
+      //console.log ("mouse2D.x: "+mouse2D.x + " mouse2D.y: " +mouse2D.y )
+      this.position = new THREE.Vector3 (mouse2D.x*SCREEN_WIDTH_HALF/6, mouse2D.y*SCREEN_HEIGHT_HALF/6, 0);
+
+    }
+
+    this.avoid = function ( target ) {
+
+          var steer = new THREE.Vector3();
+
+          steer.copy( this.position );
+          steer.subSelf( target );
+
+          steer.multiplyScalar( 1 / this.position.distanceToSquared( target ) );
+
+          return steer;
+
+        }
+
     this.run = function ( particles ) {
-      this.flock();
+
+
+      if (this.blowAway && counter/10%(this.ID+1)==0) {
+          console.log ("Particle.run() : counter: "+counter);
+          this.blowAway = false;
+          this.running = true;
+          console.log("Particle.run() : this.ID: "+this.ID);
+          // GUSH
+         _acceleration.set( Math.random()*20, Math.random()*10, 0);
+      }
+
+
+      if (this.running){
+      //this.PerlinMovement();
+
+      if ( _avoidWalls ) {
+        var vector = new THREE.Vector3();
+        vector.set( - _width, this.position.y, this.position.z );
+        vector = this.avoid( vector );
+        vector.multiplyScalar( 5 );
+        _acceleration.addSelf( vector );
+
+        vector.set( _width, this.position.y, this.position.z );
+        vector = this.avoid( vector );
+        vector.multiplyScalar( 5 );
+        _acceleration.addSelf( vector );
+
+        vector.set( this.position.x, - _height, this.position.z );
+        vector = this.avoid( vector );
+        vector.multiplyScalar( 5 );
+        _acceleration.addSelf( vector );
+
+        vector.set( this.position.x, _height, this.position.z );
+        vector = this.avoid( vector );
+        vector.multiplyScalar( 5 );
+        _acceleration.addSelf( vector );
+
+        vector.set( this.position.x, this.position.y, - _depth );
+        vector = this.avoid( vector );
+        vector.multiplyScalar( 5 );
+        _acceleration.addSelf( vector );
+
+        vector.set( this.position.x, this.position.y, _depth );
+        vector = this.avoid( vector );
+        vector.multiplyScalar( 5 );
+        _acceleration.addSelf( vector );
+
+      }
+
+     //this.followMouse();
+      this.PerlinRotate();
       this.move();
-      this.rotate();
+      this.gravitate();
+      }
     }
     
   }
+  // - - - - - - - - - - - - - - - - INIT PARTICLES - - - - - - - - - - - - - - - - -
 
   // Create sheets of paper
   particles = new Array();
   sheets = new Array();
 
-  for (var k=0; k<10; k++){
+  for (var k=0; k<PARTICLES_COUNT; k++){
 
     var p = particles [k] = new Particle();
-   //p.position.x = Math.random() * 200 - 200;
-    //p.position.y = Math.random() * 200 - 200;
-    //p.position.z = Math.random() * 200 - 200;
-    //p.velocity.x = Math.random()  - .5;
-    //p.velocity.y = Math.random()  - .5;
-    ///p.velocity.z = Math.random()  - .5;
+    //START POSITION
+    p.position = new THREE.Vector3(-50,-50-k*1,0);
+    p.ID = k;
+    p.rotation.x = 90;
+   //p.rotation.z = 45;
 
+    p.setAvoidWalls( true );
 
-    //var c = 0xEEEEEE*Math.random();
-    var pos = new THREE.Vector3(new THREE.Vector3(Math.random()*12,Math.random()*12, Math.random()*12));
-    var sheetSize = 20;
-    var sheet = sheets[k] = new THREE.Mesh(new Hokusai(k, pos, sheetSize),new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: false } ) );
+    p.setWorldSize( 500, 500, 200 );
+ 
+    // generate geometry
+    var sheet = sheets[k] = new THREE.Mesh(new Hokusai( SHEET_WIDTH),new THREE.MeshBasicMaterial( { color: 0x000000, wireframe: false } ) );
+
+    sheet.doubleSided = true;
     scene.add( sheet);
-
-    sheet.position = p.position;
   }
+
+  //visualize world
+  var cube = new THREE.Mesh( new THREE.CubeGeometry( 500, 500, 200, 1, 1, 1, new THREE.MeshBasicMaterial({ color: 0xFF0000} ) ));
+  scene.add(cube);
+  // - - - - - - - - - - - - - - - - END of INIT PARTICLES - - - - - - - - - - - - - - - - -
 
   document.addEventListener( 'mousemove', onDocumentMouseMove, false );
   document.addEventListener( 'touchstart', onDocumentTouchStart, false );
@@ -172,23 +290,35 @@ function init() {
 }
 
 function updateParticles (){
-
-
+  
   for (var k in particles){
-    if (counter%100==0) {
-      particles[k]._goal = new THREE.Vector3 (Math.random()*100, Math.random()*100, Math.random()*10)
-      console.log("reposition")
+    
+    if (counter==40) {
+      particles[k].setblowAway(true);
+      //particles[k]._goal = new THREE.Vector3 (Math.random()*100, Math.random()*100, Math.random()*10)
+      //console.log("reposition")
     }
+    var nextGush = 70+(Math.floor (particles[k].seed*40) );
+
+    if (counter%nextGush < 2){
+      //console.log("spiral")
+      particles[k].turbulence();
+
+    }
+    
+    
     sheets[k].position = particles[k].position;
     sheets[k].rotation = particles[k].rotation;
-    particles[k].run();
 
-    //p.position.y = Math.sin(counter/20*k)*20;
+    particles[k].run();
   }
    counter++;
+   //DRAG += DRAG-.01;
 }
 
-
+this.setAvoidWalls = function ( value ) {
+   _avoidWalls = value;
+ }
 
 function animate() {
 
@@ -208,7 +338,7 @@ function render() {
   //camera.position.x = orbitRadius * Math.sin( theta * Math.PI / 360 );
   //camera.position.y = orbitRadius * Math.sin( theta * Math.PI / 360 );
   //camera.position.z = orbitRadius * Math.cos( theta * Math.PI / 360 );
-  camera.position.z = 100;
+  camera.position.z = orbitRadius;
   camera.lookAt( scene.position );
 
 
@@ -220,14 +350,14 @@ function onDocumentMouseMove(event) {
   mouse2D.x = ( event.clientX / window.innerWidth ) * 2 - 1;
   mouse2D.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-/*
+
   var vector = new THREE.Vector3( event.clientX - SCREEN_WIDTH_HALF, - event.clientY + SCREEN_HEIGHT_HALF, 0 );
 
    for (var k in particles){
-    vector.z = particles[k].position.z;
-    particles[k].repulse( vector);
+    //vector.z = particles[k].position.z;
+    //particles[k].repulse( vector);
 
-  }*/
+  }
 
 }
 
@@ -255,5 +385,4 @@ function onDocumentTouchMove( event ) {
     mouse2D.y = event.touches[ 0 ].pageY - SCREEN_HEIGHT_HALF;
 
   }
-
-  }
+}
