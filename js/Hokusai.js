@@ -5,17 +5,40 @@ function Hokusai (width) {
 	this.draw = function (){
 
 		w = width;
-		
+		var r = 1.41; //A4 ratio
+		var h = w*r;
+		var k = 4; //subdivisions y
+
 		//sheet of A4
-		v3( -w/2,     0,  0 );
-		v3(  w/2,     0,  0 );
-		v3(  w/2, w*1.41,  0 );
-		v3( -w/2, w*1.41,  0 );
+		v3( -w/2, -h/2,  0 ); //0
+		v3(  w/2, -h/2,  0 ); //1
+
+
+		for (var i=0; i<k; i++){
+			v3( -w/2, -h/2+h/k*i,  0 );
+			v3(  w/2, -h/2+h/k*i,  0 );
+		}
+
+		f3 (0,1,2);
+		f3 (0,2,3);
+
+		f3 (3,2,4);
+		f3 (3,4,5);
+
+		f3 (5,4,6);
+		f3 (5,6,7);
+
+		f3 (7,6,8);
+		f3 (7,8,9);
+
+
+		//v3(  w/2,  w/2,  0 );
+		//v3( -w/2,  w/2,  0 );
 
 
 
-//flexible paper sheets
-//fold.y = Math.sin(counter)*10;
+		//flexible paper sheets
+		//fold.y = Math.sin(counter)*10;
 
 		/*
 		var vStart = v;

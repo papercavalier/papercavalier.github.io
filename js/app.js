@@ -4,7 +4,7 @@ $(function() {
 
   PARTICLES_COUNT = 10, 
   SHEET_WIDTH = 10,
-  START_POSITION = new THREE.Vector3 (-40,-25,0),
+  //START_POSITION = new THREE.Vector3 (-40,-25,0),
 
   SCREEN_WIDTH = $(".container").width(),
   SCREEN_HEIGHT = 682,
@@ -13,7 +13,7 @@ $(function() {
 
   camera, scene, renderer, projector, orbitRadius, theta, counter, particles, sheets;
 
-  window.DRAG = .95;
+  window.DRAG = .92;
   window.GRAVITY = .03;
 
   init();
