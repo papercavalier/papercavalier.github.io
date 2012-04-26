@@ -69,14 +69,7 @@ function Hokusai (width, subs) {
 	}
 	*/
 
-	
-
 	this.computeCentroids();
-
-	
-	//console.log ("Hokusai.js: this.faces.length: " + this.faces.length);
-
-	
 
 	function v3 (x,y,z){
 		scope.vertices.push( new THREE.Vector3(x,y,z));

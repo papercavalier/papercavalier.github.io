@@ -2,10 +2,12 @@ $(function() {
 
   var mouse2D = { x: 0, y: 0 },
 
-  PARTICLES_COUNT = 40, 
-  SHEET_WIDTH = 5,
+  PARTICLES_COUNT = 45, 
+  SHEET_WIDTH =4,
   SHEET_SUBDIVISIONS = 7,
   DISPLACE_DEPTH = 1,
+  START_FRAME = 40,
+  TEXTURE_PATH = "images/paper_64x64.png",
   //START_POSITION = new THREE.Vector3 (-40,-25,0),
 
   SCREEN_WIDTH = $(".container").width(),
@@ -16,7 +18,7 @@ $(function() {
   camera, scene, renderer, projector, orbitRadius, theta, counter, particles, sheets;
 
   window.DRAG = .95;
-  window.GRAVITY = .01;
+  window.GRAVITY = .005;
 
   
   init();
@@ -31,7 +33,7 @@ $(function() {
     camera = new THREE.PerspectiveCamera( 35, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000 );
     camera.position.y = -5;
     camera.position.x = 0;
-    camera.position.z = 150;
+    camera.position.z = 200;
     scene.add( camera );
 
     //CUBE
@@ -47,15 +49,6 @@ $(function() {
     renderer = new THREE.CanvasRenderer();
     renderer.sortObjects = false;
     renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-
-
-    //TEST
-    /*
-    var geometry = new THREE.SphereGeometry( 4, 4, 7, false );
-    var material = new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'examples/textures/land_ocean_ice_cloud_2048.jpg' ) , doubleSided: false });
-    var sphere = new THREE.Mesh( geometry, material );
-    sphere.doubleSided = false;
-    scene.add( sphere );*/
 
     //DOM
     var container = document.createElement('div');
@@ -78,7 +71,6 @@ $(function() {
       this.displace = false;
       this.decay = 1;
 
-      var  _width = 500, _height = 500, _depth = 200;
       var _acceleration = new THREE.Vector3();
       var _maxSpeed = 4;
       var _avoidWalls = false;
@@ -89,53 +81,26 @@ $(function() {
 
       }
       this.setDisplace = function (bool) {
-        displace = bool;
+        this.displace = bool;
       }
 
       this.setblowAway = function (bool) {
         this.blowAway = bool;
       }
 
-      this.setWorldSize = function ( width, height, depth ) {
+      this.followMouse = function () {
+        //console.log ("mouse2D.x: "+mouse2D.x + " mouse2D.y: " +mouse2D.y )
+        this.position = new THREE.Vector3 (mouse2D.x*SCREEN_WIDTH_HALF/6, mouse2D.y*SCREEN_HEIGHT_HALF/6, 0);
 
-        _width = width;
-        _height = height;
-        _depth = depth;
+      }
+      this.rotate = function () {
+        this.rotation.x = (Math.sin(this.position.x/10)+1)*2;
+        this.rotation.y = (Math.sin(this.position.y/10)+1)*2;
+        this.rotation.z = (Math.cos(this.position.y/10)+1+Math.sin(this.position.x/10)+1)*2;
 
       }
 
-      this.setAvoidWalls = function ( bool ) {
-
-        _avoidWalls = bool;
-
-      }
-      /*
-      this.flock = function ( boids ) {
-
-        //if ( _goal ) {
-
-        _acceleration.addSelf( this.reach( this._goal, 0.0001)); //0.005) );
-
-        //}
-
-        //_acceleration.addSelf( this.alignment( boids ) );
-        //_acceleration.addSelf( this.cohesion( boids ) );
-        //_acceleration.addSelf( this.separation( boids ) );
-
-      }
-
-      this.reach = function ( target, amount ) {
-
-        var steer = new THREE.Vector3();
-
-        steer.sub( target, this.position );
-        steer.multiplyScalar( amount );
-
-        return steer;
-
-      }
-*/
-      this.move = function () {
+       this.move = function () {
         this.velocity.addSelf( _acceleration );
         var l = this.velocity.length();
 
@@ -151,146 +116,37 @@ $(function() {
         
       }
       this.gravitate = function () {
-        _acceleration.addSelf (new THREE.Vector3(0,-window.GRAVITY*this.decay,0));
+        _acceleration.addSelf (new THREE.Vector3(0,-window.GRAVITY*this.decay*(this.seed*.3+.7),0));
       }
-      /*
-      this.PerlinMovement = function () {
-
-        var x = this.position.x % SCREEN_WIDTH; 
-        var y = this.position.y % SCREEN_HEIGHT;
-
-        var size = 10;  // pick a scaling value
-        var px = PerlinNoise.noise( size*x, 1, .1);
-        var py = PerlinNoise.noise( 1, size*y, .1);
-
-        var speed = .2;
-
-        //console.log("px: "+ px + " py: "+py);
-
-        _acceleration.addSelf(new THREE.Vector3((px-.5)*speed, (py-.5)*speed , 0));
-      }
-
-      this.turbulence = function () {
-        //circular movement
-        //_acceleration.addSelf( 0,0, 0 );
-       var timeOffset = this.seed * Math.PI*2;
-       var speed = 1;
-       var driver = (timeOffset+counter)/speed;
-       //blow particles up
-       _acceleration.set(Math.sin(driver)/2*this.decay, (Math.cos(driver)/2+1)*this.decay, 0);
-       // _acceleration.multiplyScalar( 1);
-      }
-    
       
-
-      this.rotate = function () {
-        this.rotation.x += .01 * this.decay;
-        this.rotation.y += .01 * this.decay;
-        this.rotation.z += .01 * this.decay;
-
-      }
-*/
-      this.PerlinRotate = function () {
-        // doesn't work
-        var x = this.position.x % SCREEN_WIDTH; 
-        var y = this.position.y % SCREEN_HEIGHT;
-        //console.log("PerlinRotate: x: "+x + " y: "+y);
-        var size = 100;  // pick a scaling value
-        var rx = PerlinNoise.noise( size*x, 1, .1);
-        var ry = PerlinNoise.noise( 1, size*y, .1);
-       //console.log("PerlinRotate: rx: "+rx + " ry: "+ry);
-        var speed =.09 * this.seed; //*this.velocity;
-
-        this.rotation.x += rx*speed *this.decay;
-        this.rotation.y += ry*speed *this.decay; 
-        this.rotation.z += .02 * this.seed * this.decay;
-
-      }
-
-      this.followMouse = function () {
-        //console.log ("mouse2D.x: "+mouse2D.x + " mouse2D.y: " +mouse2D.y )
-        this.position = new THREE.Vector3 (mouse2D.x*SCREEN_WIDTH_HALF/6, mouse2D.y*SCREEN_HEIGHT_HALF/6, 0);
-
-      }
-
-      this.avoid = function ( target ) {
-
-            var steer = new THREE.Vector3();
-
-            steer.copy( this.position );
-            steer.subSelf( target );
-
-            steer.multiplyScalar( 1 / this.position.distanceToSquared( target ) );
-
-            return steer;
-
-          }
-
       this.run = function ( particles ) {
-
-        //this.rotation.y += .01;
-       // this.rotation.x += .01;
-      
 
         // blow away
         // one after the other
         // many in the beginning
-        if (this.blowAway && (counter*40-counter) % (this.ID+1) == 0) {
-            //console.log ("Particle.run() : counter: "+counter);
+        //if (this.blowAway && (counter*40-counter) % (this.ID+1) == 0) {
+        if (this.blowAway && this.ID < counter - START_FRAME) {
+           
             this.blowAway = false;
             this.running = true;
             this.setDisplace(true);
            
-            //console.log("app.js: Particle.run() : this.ID: "+this.ID);
+          
             // GUSH
-            var xSpread = 4;
-            var ySpread = 3;
+            var xSpread = 1;
+            var ySpread = .5;
             var xGush = (Math.random()+.5)*xSpread + (this.ID+1) / PARTICLES_COUNT;
             var yGush = (Math.random()+.5)*ySpread + (this.ID+1) / PARTICLES_COUNT;
-           // console.log("Particle.run() : xGush "+xGush + " yGush "+yGush);
-            this.velocity.set( xGush, yGush, (Math.random()+.5)*4);
+           
+            this.velocity.set( xGush, yGush, (Math.random()+.5)*xSpread);
             
         }
 
 
         if (this.running){
-        //this.PerlinMovement();
-
-          if ( _avoidWalls ) {
-            var vector = new THREE.Vector3();
-            vector.set( - _width, this.position.y, this.position.z );
-            vector = this.avoid( vector );
-            vector.multiplyScalar( 5 );
-            _acceleration.addSelf( vector );
-
-            vector.set( _width, this.position.y, this.position.z );
-            vector = this.avoid( vector );
-            vector.multiplyScalar( 5 );
-            _acceleration.addSelf( vector );
-
-            vector.set( this.position.x, - _height, this.position.z );
-            vector = this.avoid( vector );
-            vector.multiplyScalar( 5 );
-            _acceleration.addSelf( vector );
-
-            vector.set( this.position.x, _height, this.position.z );
-            vector = this.avoid( vector );
-            vector.multiplyScalar( 5 );
-            _acceleration.addSelf( vector );
-
-            vector.set( this.position.x, this.position.y, - _depth );
-            vector = this.avoid( vector );
-            vector.multiplyScalar( 5 );
-            _acceleration.addSelf( vector );
-
-            vector.set( this.position.x, this.position.y, _depth );
-            vector = this.avoid( vector );
-            vector.multiplyScalar( 5 );
-            _acceleration.addSelf( vector );
-
-          }
-          //this.followMouse();
-          this.PerlinRotate();
+          
+         //this.followMouse();
+          this.rotate();
           this.move();
           this.gravitate();
 
@@ -317,17 +173,12 @@ $(function() {
       p.position =  new THREE.Vector3(-40,-20- 4/PARTICLES_COUNT*k, 0);
       p.rotation.x = 90;
       p.ID = k;
-
-     
-
-      //p.setAvoidWalls( true );
-      p.setWorldSize( 500, 500, 200 );
     
-      var texture =THREE.ImageUtils.loadTexture( "images/outline_256x256.png");
+      var texture =THREE.ImageUtils.loadTexture( TEXTURE_PATH);
       texture.magFilter = texture.minFilter =  THREE.LinearFilter;
 
       var material = new THREE.MeshBasicMaterial( { map: texture, doubleSided: true, overdraw:true, wireframe:false })
-      material.needsUpdate = true;
+      //material.needsUpdate = true;
       // TESTING
       //p.rotation.x = 0;
       //p.position.x = 1/PARTICLES_COUNT*k;
@@ -356,9 +207,12 @@ $(function() {
   function updateParticles (){
     
     for (var k in particles){
+       var p = particles[k];
+
       // blow 'em away
-      if (counter==40) {
-        particles[k].setblowAway(true);
+      if (counter== START_FRAME) {
+        //particles[k].running = true;
+        p.setblowAway(true);
       }
 
       /*
@@ -376,18 +230,19 @@ $(function() {
 
       // - - - - - - - - - - - - - - - - MESH DISPLACEMENT  - - - - - - - - - - - - - - - 
 
-      if (this.displace){
+      if (p.displace){
         var l = sheets[k].geometry.vertices.length;
         var i=0;
         while (i < l){
             var s = sheets[k].geometry.vertices[i];
-            var p = particles[k];
+           
          
-            //offset wave displace per side
+            // offset wave displace per vertice
+            // and per particle
             if (i%2==0){
-              s.z = Math.sin( counter * p.decay / 10 + Math.PI*2*i/l* p.seed) * DISPLACE_DEPTH ;
+              s.z = Math.sin( (counter+ p.seed) * p.decay / 10 + Math.PI*2* i/l * p.seed) * DISPLACE_DEPTH ;
             } else {
-              s.z = Math.cos( counter * p.decay / 10 + Math.PI*2*i/l* p.seed) * DISPLACE_DEPTH ;
+              s.z = Math.cos( (counter+ p.seed) * p.decay / 10 + Math.PI*2* i/l * p.seed) * DISPLACE_DEPTH ;
             }
 
 
@@ -396,7 +251,7 @@ $(function() {
      }
       // - - - - - - - - - - - - - - - - MESH DISPLACEMENT  - - - - - - - - - - - - - - - 
 
-      particles[k].run();
+      p.run();
     }
      counter++;
   }
@@ -406,7 +261,14 @@ $(function() {
     //console.log("app.js: animate()");
     requestAnimationFrame( animate );
 
-    render();
+   
+
+    if (counter < 250){
+      render();
+    } else if (counter == 250){
+        console.log("stop rendering");
+
+    }
   }
 
   function render() {
