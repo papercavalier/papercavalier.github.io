@@ -33,16 +33,16 @@ $(function() {
     camera = new THREE.PerspectiveCamera( 35, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000 );
     camera.position.y = -5;
     camera.position.x = 0;
-    camera.position.z = 200;
+    camera.position.z = 150;
     scene.add( camera );
 
     //CUBE
-    var cube = new THREE.Mesh(
+    /*var cube = new THREE.Mesh(
       new THREE.CubeGeometry( 80, 50, 50),
       new THREE.MeshBasicMaterial( { color: 0xFF0000, wireframe: false,  opacity: .3, blending: THREE.AdditiveBlending, overdraw: true , doubleSided: true } )
     );
     cube.doubleSided = true;
-    //scene.add( cube );
+    scene.add( cube );*/
 
     //RENDERER
     projector = new THREE.Projector();
@@ -73,7 +73,7 @@ $(function() {
 
       var _acceleration = new THREE.Vector3();
       var _maxSpeed = 4;
-      var _avoidWalls = false;
+      //var _avoidWalls = false;
 
       this.setGoal = function ( target ) {
 
@@ -170,8 +170,9 @@ $(function() {
       var p = particles [k] = new Particle();
 
       //START POSITION
-      p.position =  new THREE.Vector3(-40,-20- 4/PARTICLES_COUNT*k, 0);
+      p.position = new THREE.Vector3(-40,-20- 4/PARTICLES_COUNT*k, 0);
       p.rotation.x = 90;
+      p.rotation.z = Math.random() * .4;
       p.ID = k;
     
       var texture =THREE.ImageUtils.loadTexture( TEXTURE_PATH);
@@ -259,11 +260,12 @@ $(function() {
 
   function animate() {
     //console.log("app.js: animate()");
-    requestAnimationFrame( animate );
+    
 
    
 
-    if (counter < 250){
+    if (counter < 500){
+      requestAnimationFrame( animate );
       render();
     } else if (counter == 250){
         console.log("stop rendering");

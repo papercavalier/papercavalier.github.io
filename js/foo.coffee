@@ -35,4 +35,4 @@ $ ->
           doc.stop().animate(opacity: 0.1, 100)
 
   $(window).scroll ->
-    $('#three .text p').highlight()
+    $('#two .text p').highlight()
