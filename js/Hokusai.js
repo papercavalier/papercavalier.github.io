@@ -13,19 +13,20 @@ function Hokusai (width, subs) {
 		v3( -w/2, -h/2+h*i/subs,  0 );
 		v3(  w/2, -h/2+h*i/subs,  0 );
 	}
-	//console.log ("Hokusai: this.vertices.length: " + this.vertices.length);
+	//console.log ("Hokusai.js: this.vertices.length: " + this.vertices.length);
 
 	//Face4
-	var fNum = this.vertices.length-2;
-	for (var i=0; i <fNum; i+=2){
+	var vNum = this.vertices.length-2;
+	for (var i=0; i <vNum; i+=2){
 		
 			//console.log ("Hokusai: add faces: "+i);
 			f4 (i, i+1, i+3, i+2);
 			//f4 (i+2, i+3, i+5, i+4);
 			//f4 (i+4, i+5, i+7, i+6);
 	}
-	
+	//console.log ("Hokusai.js: this.faces.length: " + this.faces.length);
 
+	var fNum = this.faces.length;
 	for (var i= 0; i < fNum; i++){
 		this.faceVertexUvs[ 0 ].push( 
 			[
@@ -41,6 +42,8 @@ function Hokusai (width, subs) {
 			] 
 			);
 	}
+	//console.log ("Hokusai.js: this.faceVertexUvs[0].length: " + this.faceVertexUvs[0].length);
+
 //this.computeFaceNormals();
 //this.computeVertexNormals();
 
@@ -48,7 +51,7 @@ function Hokusai (width, subs) {
 	/*
 	var fNum = subs*2-2;
 	for (var i=0; i < fNum; i++){
-			//console.log ("Hokusai: add faces: "+i);
+			//console.log ("Hokusai.js: add faces: "+i);
 			f3 (i, i+1, i+2);
 			
 	}
@@ -71,7 +74,7 @@ function Hokusai (width, subs) {
 	this.computeCentroids();
 
 	
-	//console.log ("Hokusai: this.faces.length: " + this.faces.length);
+	//console.log ("Hokusai.js: this.faces.length: " + this.faces.length);
 
 	
 

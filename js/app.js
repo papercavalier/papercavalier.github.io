@@ -2,8 +2,8 @@ $(function() {
 
   var mouse2D = { x: 0, y: 0 },
 
-  PARTICLES_COUNT = 1, 
-  SHEET_WIDTH = 20,
+  PARTICLES_COUNT = 40, 
+  SHEET_WIDTH = 5,
   SHEET_SUBDIVISIONS = 7,
   DISPLACE_DEPTH = 1,
   //START_POSITION = new THREE.Vector3 (-40,-25,0),
@@ -40,7 +40,7 @@ $(function() {
       new THREE.MeshBasicMaterial( { color: 0xFF0000, wireframe: false,  opacity: .3, blending: THREE.AdditiveBlending, overdraw: true , doubleSided: true } )
     );
     cube.doubleSided = true;
-    scene.add( cube );
+    //scene.add( cube );
 
     //RENDERER
     projector = new THREE.Projector();
@@ -228,21 +228,23 @@ $(function() {
 
       this.run = function ( particles ) {
 
-        this.rotation.y += .01;
-        this.rotation.x += .01;
-        this.setDisplace(true);
+        //this.rotation.y += .01;
+       // this.rotation.x += .01;
+      
+
         // blow away
         // one after the other
         // many in the beginning
-        if (this.blowAway && (counter*30-counter) % (this.ID+1) == 0) {
+        if (this.blowAway && (counter*40-counter) % (this.ID+1) == 0) {
             //console.log ("Particle.run() : counter: "+counter);
             this.blowAway = false;
             this.running = true;
+            this.setDisplace(true);
            
-            console.log("app.js: Particle.run() : this.ID: "+this.ID);
+            //console.log("app.js: Particle.run() : this.ID: "+this.ID);
             // GUSH
-            var xSpread = 10;
-            var ySpread = 5;
+            var xSpread = 4;
+            var ySpread = 3;
             var xGush = (Math.random()+.5)*xSpread + (this.ID+1) / PARTICLES_COUNT;
             var yGush = (Math.random()+.5)*ySpread + (this.ID+1) / PARTICLES_COUNT;
            // console.log("Particle.run() : xGush "+xGush + " yGush "+yGush);
@@ -292,11 +294,13 @@ $(function() {
           this.move();
           this.gravitate();
 
+          /*
           if (this.decay > 0){
             this.decay -= .005;
           } else {
             this.decay = 0;
           }
+          */
         }
       }
     }
@@ -305,46 +309,36 @@ $(function() {
     particles = new Array();
     sheets = new Array();
 
-    //var mapping = THREE.ClampToEdgeWrapping();
-    /*
-    var textureImg = new Image();
-    textureImg.onload = function(){
-      console.log ("app.js: texure loaded");
-      //animate(lastTime, angularSpeed, three, this);
-      animate();
-
-    };
-    textureImg.src = "/images/rainbow_64x64.jpg";
-    */
-    
-
     for (var k=0; k<PARTICLES_COUNT; k++){
 
       var p = particles [k] = new Particle();
 
       //START POSITION
-      //p.position =  new THREE.Vector3(-40,-20- 4/PARTICLES_COUNT*k, 0); //new THREE.Vector3(); //
-      p.ID = k;
+      p.position =  new THREE.Vector3(-40,-20- 4/PARTICLES_COUNT*k, 0);
       p.rotation.x = 90;
+      p.ID = k;
+
      
 
       //p.setAvoidWalls( true );
       p.setWorldSize( 500, 500, 200 );
     
-      var texture =THREE.ImageUtils.loadTexture( "images/outline_64x64.png");
-      //texture.repeat = true;
-      //texture.mapping = new THREE.UVMapping();
+      var texture =THREE.ImageUtils.loadTexture( "images/outline_256x256.png");
+      texture.magFilter = texture.minFilter =  THREE.LinearFilter;
+
+      var material = new THREE.MeshBasicMaterial( { map: texture, doubleSided: true, overdraw:true, wireframe:false })
+      material.needsUpdate = true;
+      // TESTING
+      //p.rotation.x = 0;
+      //p.position.x = 1/PARTICLES_COUNT*k;
+      //if (k%2==0) texture = undefined;
 
       // generate geometry
       var sheet = sheets[k] = new THREE.Mesh(
                               new Hokusai( SHEET_WIDTH, SHEET_SUBDIVISIONS),
-                              new THREE.MeshBasicMaterial( { map: texture, doubleSided: true, overdraw:false, wireframe:true })
+                              material
                               );
-     /*
-      var sheet = sheets[k] = new THREE.Mesh(
-                              new THREE.PlaneGeometry(SHEET_WIDTH, SHEET_WIDTH*2, 2, 2),
-                              new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( 'images/rainbow_64x64.jpg' ) , doubleSided: false })
-                              ); */
+   
       sheet.doubleSided = true;
       scene.add( sheet);
     }
@@ -364,7 +358,7 @@ $(function() {
     for (var k in particles){
       // blow 'em away
       if (counter==40) {
-        //particles[k].setblowAway(true);
+        particles[k].setblowAway(true);
       }
 
       /*
@@ -380,25 +374,27 @@ $(function() {
       sheets[k].position = particles[k].position;
       sheets[k].rotation = particles[k].rotation;
 
+      // - - - - - - - - - - - - - - - - MESH DISPLACEMENT  - - - - - - - - - - - - - - - 
+
       if (this.displace){
-        //update geo
         var l = sheets[k].geometry.vertices.length;
         var i=0;
         while (i < l){
             var s = sheets[k].geometry.vertices[i];
             var p = particles[k];
          
-            //offset  wave displace
+            //offset wave displace per side
             if (i%2==0){
-              s.z = Math.sin( counter* p.decay/10 + Math.PI*2*i/l* p.seed) * DISPLACE_DEPTH ;
+              s.z = Math.sin( counter * p.decay / 10 + Math.PI*2*i/l* p.seed) * DISPLACE_DEPTH ;
             } else {
-              s.z = Math.cos( counter* p.decay/10 + Math.PI*2*i/l* p.seed) * DISPLACE_DEPTH ;
+              s.z = Math.cos( counter * p.decay / 10 + Math.PI*2*i/l* p.seed) * DISPLACE_DEPTH ;
             }
 
 
             i++;
         }
      }
+      // - - - - - - - - - - - - - - - - MESH DISPLACEMENT  - - - - - - - - - - - - - - - 
 
       particles[k].run();
     }
