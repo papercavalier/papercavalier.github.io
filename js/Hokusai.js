@@ -6,24 +6,74 @@ function Hokusai (width, subs) {
 
 	var r = 1.42; //A4 ratio
 	var h = w*r;
-
 	
-	for (var i=0; i<subs; i++){
-
+	
+	for (var i=0; i<subs+1; i++){
+		//console.log ("Hokusai: add vertices: "+i);
 		v3( -w/2, -h/2+h*i/subs,  0 );
 		v3(  w/2, -h/2+h*i/subs,  0 );
 	}
+	//console.log ("Hokusai: this.vertices.length: " + this.vertices.length);
 
-	for (var i=0; i< subs*2-2; i++){
+	//Face4
+	var fNum = this.vertices.length-2;
+	for (var i=0; i <fNum; i+=2){
+		
+			//console.log ("Hokusai: add faces: "+i);
+			f4 (i, i+1, i+3, i+2);
+			//f4 (i+2, i+3, i+5, i+4);
+			//f4 (i+4, i+5, i+7, i+6);
+	}
+	
+
+	for (var i= 0; i < fNum; i++){
+		this.faceVertexUvs[ 0 ].push( 
+			[
+				
+				new THREE.UV(  0 , i/fNum ),
+				new THREE.UV(  1 , i/fNum ),
+				new THREE.UV(  1, (i+1)/fNum ),
+				new THREE.UV(  0, (i+1)/fNum )
+				//new THREE.UV( -w/2 , -h/2 + i/fNum*h     ),
+				//new THREE.UV(  w/2 , -h/2 + i/fNum*h     ),
+				//new THREE.UV(  w/2 , -h/2 + (i+1)/fNum*h ),
+				//new THREE.UV( -w/2 , -h/2 + (i+1)/fNum*h )
+			] 
+			);
+	}
+//this.computeFaceNormals();
+//this.computeVertexNormals();
+
+	//Face3
+	/*
+	var fNum = subs*2-2;
+	for (var i=0; i < fNum; i++){
 			//console.log ("Hokusai: add faces: "+i);
 			f3 (i, i+1, i+2);
+			
 	}
+	this.computeFaceNormals();
+	this.computeVertexNormals();
+	for (var i= 0; i < fNum; i++){
+		this.faceVertexUvs[ 0 ].push( 
+			[
+				new THREE.UV( -w/2 , -h/2 + i/fNum*h     ),
+				new THREE.UV(  w/2 , -h/2 + i/fNum*h     ),
+				new THREE.UV( -w/2 , -h/2 + (i+1)/fNum*h )
+				//new THREE.UV( ( i + 1 ) / gridX, iz / gridZ )
+			] 
+			);
+	}
+	*/
 
-	//console.log ("Hokusai: this.vertices.length: " + this.vertices.length);
+	
+
+	this.computeCentroids();
+
+	
 	//console.log ("Hokusai: this.faces.length: " + this.faces.length);
 
-	this.computeFaceNormals();
-
+	
 
 	function v3 (x,y,z){
 		scope.vertices.push( new THREE.Vector3(x,y,z));
@@ -31,7 +81,9 @@ function Hokusai (width, subs) {
 	function f3 (a,b,c){
 		scope.faces.push( new THREE.Face3(a,b,c) );
 	}
-
+	function f4 (a,b,c,d){
+		scope.faces.push( new THREE.Face4(a,b,c,d) );
+	}
 }
 
 Hokusai.prototype = new THREE.Geometry();
