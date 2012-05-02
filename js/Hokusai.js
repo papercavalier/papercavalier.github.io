@@ -15,30 +15,20 @@ function Hokusai (width, subs) {
 	}
 	//console.log ("Hokusai.js: this.vertices.length: " + this.vertices.length);
 
-	//Face4
 	var vNum = this.vertices.length-2;
 	for (var i=0; i <vNum; i+=2){
-		
-			//console.log ("Hokusai: add faces: "+i);
 			f4 (i, i+1, i+3, i+2);
-			//f4 (i+2, i+3, i+5, i+4);
-			//f4 (i+4, i+5, i+7, i+6);
 	}
 	//console.log ("Hokusai.js: this.faces.length: " + this.faces.length);
 
 	var fNum = this.faces.length;
 	for (var i= 0; i < fNum; i++){
 		this.faceVertexUvs[ 0 ].push( 
-			[
-				
+			[	
 				new THREE.UV(  0 , i/fNum ),
 				new THREE.UV(  1 , i/fNum ),
 				new THREE.UV(  1, (i+1)/fNum ),
 				new THREE.UV(  0, (i+1)/fNum )
-				//new THREE.UV( -w/2 , -h/2 + i/fNum*h     ),
-				//new THREE.UV(  w/2 , -h/2 + i/fNum*h     ),
-				//new THREE.UV(  w/2 , -h/2 + (i+1)/fNum*h ),
-				//new THREE.UV( -w/2 , -h/2 + (i+1)/fNum*h )
 			] 
 			);
 	}
