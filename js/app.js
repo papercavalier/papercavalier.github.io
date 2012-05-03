@@ -178,7 +178,8 @@ $(function() {
       var texture =THREE.ImageUtils.loadTexture( TEXTURE_PATH);
       texture.magFilter = texture.minFilter =  THREE.LinearFilter;
 
-      var material = new THREE.MeshBasicMaterial( { map: texture, doubleSided: true, overdraw:true, wireframe:false })
+      //var material = new THREE.MeshBasicMaterial( { map: texture, doubleSided: true, overdraw:true, wireframe:false })
+      var material = new THREE.MeshBasicMaterial( {  color: 0x333333, wireframe:true })
       //material.needsUpdate = true;
       // TESTING
       //p.rotation.x = 0;
