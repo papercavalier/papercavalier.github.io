@@ -28,14 +28,27 @@ p {
 }
 #splat1 {
   position: absolute;
-  left:300px;
+  left:280px;
   top:600px;
   opacity: 0;
 }
 #splat2 {
   position: absolute;
   left:250px;
-  top:590px;
+  top:602px;
+  opacity: 0;
+}
+#splat3 {
+  position: absolute;
+  left:250px;
+  top:650px;
+  opacity: 0;
+  
+}
+#splat4 {
+  position: absolute;
+  left:250px;
+  top:650px;
   opacity: 0;
   
 }
