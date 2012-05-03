@@ -34,5 +34,33 @@ $ ->
         unless doc.css('opacity') is 0.1
           doc.stop().animate(opacity: 0.1, 100)
 
+  
+
   $(window).scroll ->
     $('#two .text p').highlight()
+    w = $(this).scrollTop()
+    $("#splat1").css('opacity', fadeMe w, 30, 400, 600)
+    $("#splat2").css('opacity', fadeMe w, 30, 500, 650)
+    $("#splat3").css('opacity', fadeMe w, 30, 550, 750)
+
+
+  fadeMe =(scroll, fadeSteps, startFade, startFadeOut) ->
+    if scroll > startFade and scroll < startFade+fadeSteps
+      o = (scroll - startFade)/fadeSteps
+    else if scroll >= startFade+fadeSteps and scroll < startFadeOut
+      o = 1
+    else if scroll >= startFadeOut and scroll < startFadeOut+fadeSteps
+      o = 1-(scroll - startFadeOut)/fadeSteps
+    else
+      o = 0
+    # console.log(o)
+    o
+
+  
+
+   
+
+
+
+
+  

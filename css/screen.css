@@ -26,3 +26,16 @@ p {
 #two {
   background: #EEE;
 }
+#splat1 {
+  position: absolute;
+  left:300px;
+  top:600px;
+  opacity: 0;
+}
+#splat2 {
+  position: absolute;
+  left:250px;
+  top:590px;
+  opacity: 0;
+  
+}
