@@ -3,10 +3,10 @@ a {
 }
 h1 {
   font-family: 'Crimson Text', serif;
-  font-size: 4.5em;
+  font-size: 4em;
   line-height: 1em;
-  font-weight: normal;
-  margin: 2em 0 1.5em 0;
+  font-weight: semi-bold;
+  margin: 2em 0 0.5em 0;
   color:0x222;
 }
 

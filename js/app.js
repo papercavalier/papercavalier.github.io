@@ -321,19 +321,17 @@ $(function() {
     //portrait covers fade in & fade out
     var portraitsHeight = $portraits.height();
     var y = $portraits.position().top;
-     console.log('app.js: window.scroll: y: '+y);
     var offset = $(window).scrollTop() - y + $(window).height()/2;
-    console.log('app.js: window.scroll: offset: '+offset);
     var portraitsPct = offset/portraitsHeight;
 
     portraitsPct *=  1.2;
-    console.log('app.js: window.scroll: portraitsPct: '+Math.floor (portraitsPct*100));
+    //console.log('app.js: window.scroll: portraitsPct: '+Math.floor (portraitsPct*100));
 
     var emptyPortraits = 4 - names.length%4;
 
     var c = 0;
     $portraitCovers.children().each(function () {
-      $(this).css ('opacity', fadeMe (portraitsPct, 5, c/(names.length+emptyPortraits)));
+      $(this).css ('opacity', fadeMe (portraitsPct, 2, c/(names.length+emptyPortraits)));
       c ++;
     });
 
@@ -344,7 +342,7 @@ $(function() {
   });
 
   $(window).resize(function() {
-    console.log('$(window).resize: width:' +$(window).width() + ' height: '+$(window).height())
+    //console.log('$(window).resize: width:' +$(window).width() + ' height: '+$(window).height())
     START_POSITION = new THREE.Vector3 (0,0,0);
 
     SCREEN_WIDTH = $(window).width();
