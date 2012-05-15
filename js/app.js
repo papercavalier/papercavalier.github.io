@@ -8,24 +8,33 @@ $(function() {
   DISPLACE_DEPTH = 1,
   START_FRAME = 40,
   TEXTURE_PATH = "images/paper_64x64.png",
-  //START_POSITION = new THREE.Vector3 (-40,-25,0),
-
-  SCREEN_WIDTH = $(".container").width(),
-  SCREEN_HEIGHT = 682,
-  SCREEN_WIDTH_HALF = SCREEN_WIDTH  / 2,
-  SCREEN_HEIGHT_HALF = SCREEN_HEIGHT / 2,
+  //START_POSITION = new THREE.Vector3 (-60,-25,0),
+  START_POSITION = new THREE.Vector3 (-50,40,0),
+  
 
   camera, scene, renderer, projector, orbitRadius, theta, counter, particles, sheets;
 
   window.DRAG = .95;
   window.GRAVITY = .005;
 
-  
+  var names= ['Aaron', 'Amanda', 'Angela','Aitor', 'Eric','Genis','Genn','Hakan','Nas','Nelson','Rob'];
+
+  var $portraits = $('#portraits');
+  var $portraitImages = $('#portrait-images');
+  var $portraitCovers = $('#portrait-covers');
+
+  addPortraits ();
+
+  SCREEN_WIDTH = $("body").width(),
+  SCREEN_HEIGHT = $("body").height(),
+  SCREEN_WIDTH_HALF = SCREEN_WIDTH  / 2,
+  SCREEN_HEIGHT_HALF = SCREEN_HEIGHT / 2,
+
   init();
   animate();
   
   function init() {
-     console.log("app.js: init()");
+
     //SCENE
     scene = new THREE.Scene();
    
@@ -33,16 +42,8 @@ $(function() {
     camera = new THREE.PerspectiveCamera( 35, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000 );
     camera.position.y = -5;
     camera.position.x = 0;
-    camera.position.z = 150;
+    camera.position.z = 350; //150
     scene.add( camera );
-
-    //CUBE
-    /*var cube = new THREE.Mesh(
-      new THREE.CubeGeometry( 80, 50, 50),
-      new THREE.MeshBasicMaterial( { color: 0xFF0000, wireframe: false,  opacity: .3, blending: THREE.AdditiveBlending, overdraw: true , doubleSided: true } )
-    );
-    cube.doubleSided = true;
-    scene.add( cube );*/
 
     //RENDERER
     projector = new THREE.Projector();
@@ -52,7 +53,7 @@ $(function() {
 
     //DOM
     var container = document.createElement('div');
-    $("#hokusai .container").append(container);
+    $("#hokusai").append(container);
     container.appendChild( renderer.domElement );
 
 
@@ -73,7 +74,6 @@ $(function() {
 
       var _acceleration = new THREE.Vector3();
       var _maxSpeed = 4;
-      //var _avoidWalls = false;
 
       this.setGoal = function ( target ) {
 
@@ -121,9 +121,7 @@ $(function() {
       
       this.run = function ( particles ) {
 
-        // blow away
-        // one after the other
-        // many in the beginning
+       
         //if (this.blowAway && (counter*40-counter) % (this.ID+1) == 0) {
         if (this.blowAway && this.ID < counter - START_FRAME) {
            
@@ -170,7 +168,7 @@ $(function() {
       var p = particles [k] = new Particle();
 
       //START POSITION
-      p.position = new THREE.Vector3(-40,-20- 4/PARTICLES_COUNT*k, 0);
+      p.position = new THREE.Vector3(START_POSITION.x,START_POSITION.y - 4/PARTICLES_COUNT*k, 0);
       p.rotation.x = 90;
       p.rotation.z = Math.random() * .4;
       p.ID = k;
@@ -178,13 +176,9 @@ $(function() {
       var texture =THREE.ImageUtils.loadTexture( TEXTURE_PATH);
       texture.magFilter = texture.minFilter =  THREE.LinearFilter;
 
-      //var material = new THREE.MeshBasicMaterial( { map: texture, doubleSided: true, overdraw:true, wireframe:false })
-      var material = new THREE.MeshBasicMaterial( {  color: 0x333333, wireframe:true })
-      //material.needsUpdate = true;
-      // TESTING
-      //p.rotation.x = 0;
-      //p.position.x = 1/PARTICLES_COUNT*k;
-      //if (k%2==0) texture = undefined;
+      //var material = new THREE.MeshBasicMaterial( { map: texture, doubleSided: true,  wireframe:false })
+      var material = new THREE.MeshBasicMaterial( {color: 0xFFFFFF,  wireframe:false, overdraw:true })
+
 
       // generate geometry
       var sheet = sheets[k] = new THREE.Mesh(
@@ -216,16 +210,6 @@ $(function() {
         //particles[k].running = true;
         p.setblowAway(true);
       }
-
-      /*
-      var nextGush = 70+(Math.floor (particles[k].seed*40) );
-      if (counter%nextGush < 2){
-        //console.log("spiral")
-        particles[k].turbulence();
-
-      }
-      */
-      
       
       sheets[k].position = particles[k].position;
       sheets[k].rotation = particles[k].rotation;
@@ -251,7 +235,6 @@ $(function() {
             i++;
         }
      }
-      // - - - - - - - - - - - - - - - - MESH DISPLACEMENT  - - - - - - - - - - - - - - - 
 
       p.run();
     }
@@ -261,11 +244,11 @@ $(function() {
 
   function animate() {
     //console.log("app.js: animate()");
-    
+     render();
 
    
-
-    if (counter < 500){
+     
+    if (counter < 2500){
       requestAnimationFrame( animate );
       render();
     } else if (counter == 250){
@@ -320,4 +303,72 @@ $(function() {
 
     }
   }
+
+  function addPortraits() {
+    
+
+    for (var k in names){
+      $portraitImages.append('<img class="portrait" src="images/portraits/'+names[k]+'.jpg" />');
+      $portraitCovers.append('<div class="portrait-cover"><p>'+names[k]+'</p></div>');
+    }
+    var h = Math.ceil(names.length /4)*350;
+    $portraits.css('height', h);
+  }
+  
+  $(window).scroll(function () {
+   
+
+    //portrait covers fade in & fade out
+    var portraitsHeight = $portraits.height();
+    var y = $portraits.position().top;
+     console.log('app.js: window.scroll: y: '+y);
+    var offset = $(window).scrollTop() - y + $(window).height()/2;
+    console.log('app.js: window.scroll: offset: '+offset);
+    var portraitsPct = offset/portraitsHeight;
+
+    portraitsPct *=  1.2;
+    console.log('app.js: window.scroll: portraitsPct: '+Math.floor (portraitsPct*100));
+
+    var emptyPortraits = 4 - names.length%4;
+
+    var c = 0;
+    $portraitCovers.children().each(function () {
+      $(this).css ('opacity', fadeMe (portraitsPct, 5, c/(names.length+emptyPortraits)));
+      c ++;
+    });
+
+    //counter = $(window).scrollTop();
+    //counter++;
+    //console.log('app.js: window.scroll: counter: '+ counter);
+    //animate();
+  });
+
+  $(window).resize(function() {
+    console.log('$(window).resize: width:' +$(window).width() + ' height: '+$(window).height())
+    START_POSITION = new THREE.Vector3 (0,0,0);
+
+    SCREEN_WIDTH = $(window).width();
+    SCREEN_HEIGHT = $(window).height();
+    SCREEN_WIDTH_HALF = SCREEN_WIDTH  / 2;
+    SCREEN_HEIGHT_HALF = SCREEN_HEIGHT / 2;
+
+    renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+
+  });
+
+  var fadeMe = function (pct, fadeSteps, startFade) {
+    fadeSteps = fadeSteps/100;
+    startFadeOut = startFade+fadeSteps;
+    var o;
+      if (pct > startFade && pct < startFade+fadeSteps){
+        o = (pct - startFade)/fadeSteps;
+      } else if (pct >= startFade+fadeSteps && pct < startFadeOut) {
+        o = 1;
+      } else if (pct >= startFadeOut && pct < startFadeOut+fadeSteps) {
+        o = 1-(pct - startFadeOut)/fadeSteps;
+      } else {
+        o = 0;
+      }
+      return o;
+  };
 });

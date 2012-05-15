@@ -4,19 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Paper Cavalier</title>
+  <link href='http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/vendor/css/bootstrap.css">
   <link rel="stylesheet" href="/css/screen.css">
   <script src="/vendor/js/jquery.js"></script>
   <script src="/vendor/js/Three.js"></script>
   <script src="/js/Hokusai.js"></script>
   <script src="/js/app.js"></script>
-  <script src="/js/foo.js"></script>
+ <!-- <script src="/js/foo.js"></script>-->
 </head>
 <body>
-  <section class="page" id="hokusai">
-    <div class="container">
-    </div>
-  </section>
+  <div id="hokusai"></div>
   <!-- hokusai -->
   <section class="page" id="two">
     <div class="container">
@@ -25,7 +23,8 @@
         <a href="#two">2</a>
         <a href="#three">3</a>
       </nav>-->
-      <div class="title"><h2>Papercavalier</h2></div>
+      <div class="title"><h1>Papercavalier</h1></div>
+      <img id="logo" src="images/logo_noFill.png" />
       <img id="splat1" src="images/splat1.png" />
       <img id="splat2" src="images/splat2.png" />
       <img id="splat3" src="images/splat3.png" />
@@ -42,18 +41,31 @@
   <section class="page" id="three">
     <div class="container">
       <nav>
-        <a href="#hokusai">1</a>
+        <!--<a href="#hokusai">1</a>
         <a href="#two">2</a>
-        <a href="#three">3</a>
+        <a href="#three">3</a>--> 
       </nav>
       <div class="text">
-        <div class="title"><h2>That's us.</h2></div>
+        <div class="title"><h2>C'est nous:</h2></div>
         <p>We currently have over 20 employees who work from offices in New York City and London, and remotely from Tokyo and Buenos Aires.</p>
       </div>
-    </div>
+      <div id="portraits">
+        <div id="portrait-images"></div>
+        <div id="portrait-covers"></div>
+      </div>
+
   </section>
   <section class="page">
+    <div class="container">
+      <div class="title"><h2>Job Posting</h2></div>
+      <div id="spacer"></div>
+    </div>
   </section>
   <!-- three -->
+  <section class="page">
+    <div class="container">
+      <div id="footer"></div>
+    </div>
+ </section>
 </body>
 </html>

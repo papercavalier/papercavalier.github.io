@@ -1,7 +1,6 @@
 function Hokusai (width, subs) {
 	var scope  = this;
-
-	THREE.Geometry.call( this );
+	THREE.Geometry.call( this);
 	var w = width;
 
 	var r = 1.42; //A4 ratio
@@ -32,10 +31,13 @@ function Hokusai (width, subs) {
 			] 
 			);
 	}
+	
+
 	//console.log ("Hokusai.js: this.faceVertexUvs[0].length: " + this.faceVertexUvs[0].length);
 
-//this.computeFaceNormals();
-//this.computeVertexNormals();
+
+	//this.computeFaceNormals();
+	//this.computeVertexNormals();
 
 	//Face3
 	/*
@@ -58,6 +60,7 @@ function Hokusai (width, subs) {
 			);
 	}
 	*/
+	
 
 	this.computeCentroids();
 

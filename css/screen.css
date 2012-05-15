@@ -1,15 +1,17 @@
-#hokusai {
-  background: #fff;
-}
-
-
-
 a {
   color: #000;
 }
+h1 {
+  font-family: 'Crimson Text', serif;
+  font-size: 4.5em;
+  line-height: 1em;
+  font-weight: normal;
+  margin: 2em 0 1.5em 0;
+  color:0x222;
+}
 
 h2 {
-	font-family: georgia, times, serif;
+	font-family: 'Crimson Text', serif;
   font-size: 3em;
   line-height: 1em;
   font-weight: normal;
@@ -17,11 +19,20 @@ h2 {
   color:0x222;
 }
 p {
-	font-family: georgia, times, serif;
+  font-family: 'Crimson Text', serif;
+	/*font-family: georgia, times, serif;*/
   font-size: 1.8em;
   line-height: 1.5em;
   color:0x333;
   margin: 0 0 1em 0;
+}
+section  {
+  padding: 0 0 3em 0;
+}
+
+#footer {
+  background: bisque;
+  height: 30px;
 }
 #two {
   background: #EEE;
@@ -32,6 +43,12 @@ p {
   top:600px;
   opacity: 0;
 }
+
+#hokusai {
+ position:absolute;
+ z-index: 1;
+}
+
 #splat2 {
   position: absolute;
   left:250px;
@@ -51,4 +68,44 @@ p {
   top:650px;
   opacity: 0;
   
+}
+
+#portraits {
+  position: relative;
+  margin: 0 0 1em 0;
+}
+
+#portrait-images, #portrait-covers{
+  position:absolute;  
+}
+.portrait-cover {
+  display: inline-block;
+  width:233px;
+  height:350px;
+  background:white;
+ opacity: 0;
+ -moz-opacity: 0;
+ filter:alpha(opacity=0);
+}
+.portrait-cover p {
+  position:relative;
+  top:300px;
+  left:0;
+  text-align: center;
+}
+.portrait, .portrait-cover{
+  margin: 0 2px 2px 0;
+}
+
+#spacer {
+  display: block;
+  height:100px;
+  width:200px;
+  background: gray;
+}
+#logo {
+  position: relative;
+  left: -100px;
+  top: -176px;
+  margin: 0 0 -140px 0;
 }
