@@ -56,47 +56,30 @@ $ ->
     }
   ]
 
-  # Add people to the page.
-  $portraits = $('#people')
-  $portraitImages = $('#images');
-  $portraitCovers = $('#blurbs');
+  # Add people to the about us section.
+  $blurbs = $('#blurbs')
+  $images = $('#images')
+  $people = $('#people')
+
+  peopleLength = people.length
+  $people.height(peopleHeight = Math.ceil(people.length / 4) * 350)
 
   for person in people
-    $portraitImages.append "<img class='image' src='images/portraits/#{person.name}.jpg' />"
-    $portraitCovers.append "<div class='blurb'><p>#{person.blurb}</p></div>"
-    h = Math.ceil(people.length / 4) * 350
-    $portraits.css 'height', h
+    $images.append "<img src='/images/portraits/#{person.name}.jpg'>"
+    $blurbs.append "<div class='blurb'><p>#{person.blurb}</p></div>"
 
-  $(window).scroll ->
-    portraitsHeight = $portraits.height()
-    y = $portraits.position().top
-    offset = $(window).scrollTop() - y + $(window).height() / 2
-    portraitsPct = offset / portraitsHeight
-    portraitsPct *=  1.2
+  do showBlurb = ->
+    offset = $(window).scrollTop() - $people.position().top + $(window).height() * 0.6
+    coefficient = offset / peopleHeight
+    nth = Math.floor peopleLength * coefficient
 
-    emptyPortraits = 4 - people.length % 4
+    $blurbs.children().each (index) ->
+      if index == nth
+        $(@).css opacity: 1
+      else
+        $(@).css opacity: 0
 
-    c = 0
-    $portraitCovers.children().each ->
-      console.log fadeMe(portraitsPct, 2, c / (people.length + emptyPortraits))
-      $(this).css 'opacity', fadeMe(portraitsPct, 2, c / (people.length + emptyPortraits))
-      c++
-
-  fadeMe = (pct, fadeSteps, startFade) ->
-    fadeSteps = fadeSteps/100
-    startFadeOut = startFade+fadeSteps
-    o = nil
-    if (pct > startFade && pct < startFade+fadeSteps)
-      o = (pct - startFade)/fadeSteps
-    else if (pct >= startFade+fadeSteps && pct < startFadeOut)
-      o = 1
-    else if (pct >= startFadeOut && pct < startFadeOut+fadeSteps)
-      o = 1-(pct - startFadeOut)/fadeSteps;
-    else
-      o = 0
-    return o
-
-
+  $(window).scroll -> showBlurb()
 
 
   # $.fn.highlight = ->

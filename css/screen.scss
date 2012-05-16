@@ -41,7 +41,7 @@ section {
   background: #eee;
 
   .container {
-    padding: 60px 0 120px;
+    padding: 60px 0 210px;
   }
 
   #people {
@@ -57,9 +57,7 @@ section {
     display: inline-block;
     width: 233px;
     height: 350px;
-    opacity: 0;
-    -moz-opacity: 0;
-    filter: alpha(opacity=0);
+    background: #eee;
   }
 
   .blurb p {
@@ -69,14 +67,14 @@ section {
     text-align: center;
   }
 
-  .image {
+  .blurb, img {
     margin: 0 2px 2px 0;
   }
 }
 
 footer {
   background: #222;
-  padding: 45px 0 60px;
+  padding: 60px 0 75px;
 
   ul {
     list-style-type: none;
