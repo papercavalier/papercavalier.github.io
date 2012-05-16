@@ -3,7 +3,7 @@ require 'coffee-script'
 module Jekyll
   class CoffeeScriptConverter < Converter
     safe true
-    priority :normal
+    priority :low
 
     def matches(ext)
       ext =~ /coffee/i
