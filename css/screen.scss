@@ -1,0 +1,92 @@
+---
+---
+@import url(http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600italic);
+
+h1, p {
+  font-family: 'Crimson Text', serif;
+}
+
+p {
+  font-size: 3em;
+  line-height: 1.5em;
+  margin-bottom: 1em;
+}
+
+section {
+  .container {
+    padding-top: 30px;
+  }
+}
+
+#hokusai {
+  background: #333;
+  color: #aaa;
+
+  h1 {
+    color: #fff;
+    font-size: 6em;
+    line-height: 1.5em;
+  }
+
+  a {
+    color: #bbb;
+    margin-left: 12px;
+  }
+}
+
+#company {
+}
+
+#about-us {
+  background: #eee;
+
+  .container {
+    padding: 60px 0 120px;
+  }
+
+  #people {
+    position: relative;
+    margin-bottom: 1em;
+  }
+
+  #images, #blurbs {
+    position: absolute;
+  }
+
+  .blurb {
+    display: inline-block;
+    width: 233px;
+    height: 350px;
+    opacity: 0;
+    -moz-opacity: 0;
+    filter: alpha(opacity=0);
+  }
+
+  .blurb p {
+    position: relative;
+    top: 300px;
+    left: 0;
+    text-align: center;
+  }
+
+  .image {
+    margin: 0 2px 2px 0;
+  }
+}
+
+footer {
+  background: #222;
+  padding: 45px 0 60px;
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-family: helvetica, sans-serif;
+
+    li {
+      font-size: 1.25em;
+      line-height: 1.5;
+    }
+  }
+}
