@@ -1,2 +1,6 @@
 server:   true
 auto:     true
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
