@@ -4,13 +4,13 @@ $(function() {
 
   PARTICLES_COUNT = 45, 
   SHEET_WIDTH =4,
-  SHEET_SUBDIVISIONS = 3,
+  SHEET_SUBDIVISIONS = 7,
   DISPLACE_DEPTH = 1,
   START_FRAME = 40,
-  //TEXTURE_PATH = "/images/paper_64x64.png",
+  TEXTURE_PATH = "/images/paper_64x64.png",
   //START_POSITION = new THREE.Vector3 (-60,-25,0),
   START_POSITION = new THREE.Vector3 (-58,-35,0),
-  material = new THREE.MeshBasicMaterial( {color: 0xFFFFFF,  wireframe:false, overdraw:false }),
+  //material = new THREE.MeshBasicMaterial( {color: 0xFFFFFF,  wireframe:false, overdraw:false }),
 
   camera, scene, renderer, counter, particles, sheets,
 
@@ -118,7 +118,7 @@ $(function() {
            
             this.blowAway = false;
             this.running = true;
-            this.setDisplace(false);
+            this.setDisplace(true);
            
           
             // GUSH
@@ -164,10 +164,10 @@ $(function() {
       p.rotation.z = Math.random() * .4;
       p.ID = k;
     
-      //var texture =THREE.ImageUtils.loadTexture( TEXTURE_PATH);
-     //texture.magFilter = texture.minFilter =  THREE.LinearFilter;
+      var texture = THREE.ImageUtils.loadTexture( TEXTURE_PATH);
+      texture.magFilter = texture.minFilter =  THREE.LinearFilter;
 
-      //var material = new THREE.MeshBasicMaterial( { map: texture, doubleSided: true,  wireframe:false })
+      var material = new THREE.MeshBasicMaterial( { map: texture, doubleSided: true,  wireframe:false })
       
 
 
