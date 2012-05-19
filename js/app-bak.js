@@ -4,23 +4,23 @@ $(function() {
 
   PARTICLES_COUNT = 45, 
   SHEET_WIDTH =4,
-  SHEET_SUBDIVISIONS = 7,
+  SHEET_SUBDIVISIONS = 3,
   DISPLACE_DEPTH = 1,
   START_FRAME = 40,
   //TEXTURE_PATH = "/images/paper_64x64.png",
   //START_POSITION = new THREE.Vector3 (-60,-25,0),
   START_POSITION = new THREE.Vector3 (-58,-35,0),
-  
+  material = new THREE.MeshBasicMaterial( {color: 0xFFFFFF,  wireframe:false, overdraw:false }),
 
-  camera, scene, renderer, counter, particles, sheets;
+  camera, scene, renderer, counter, particles, sheets,
 
-  window.DRAG = .95;
-  window.GRAVITY = .0035;
-
+  DRAG = .95,
+  GRAVITY = .0035,
+  running = false,
   SCREEN_WIDTH = 1000,
   SCREEN_HEIGHT = 570,
   SCREEN_WIDTH_HALF = SCREEN_WIDTH  / 2,
-  SCREEN_HEIGHT_HALF = SCREEN_HEIGHT / 2,
+  SCREEN_HEIGHT_HALF = SCREEN_HEIGHT / 2;
 
   init();
   animate();
@@ -99,14 +99,14 @@ $(function() {
           this.velocity.divideScalar( l / _maxSpeed );
         }
         // fake air resistance
-        this.velocity.multiplyScalar(window.DRAG + this.seed*.03);
+        this.velocity.multiplyScalar(DRAG + this.seed*.03);
 
         this.position.addSelf( this.velocity );
         _acceleration.set( 0, 0, 0 );
         
       }
       this.gravitate = function () {
-        _acceleration.addSelf (new THREE.Vector3(0,-window.GRAVITY*this.decay*(this.seed*.3+.7),0));
+        _acceleration.addSelf (new THREE.Vector3(0,-GRAVITY*this.decay*(this.seed*.3+.7),0));
       }
       
       this.run = function ( particles ) {
@@ -117,7 +117,7 @@ $(function() {
            
             this.blowAway = false;
             this.running = true;
-            this.setDisplace(true);
+            this.setDisplace(false);
            
           
             // GUSH
@@ -138,13 +138,13 @@ $(function() {
           this.move();
           this.gravitate();
 
-          /*
+          
           if (this.decay > 0){
             this.decay -= .005;
           } else {
             this.decay = 0;
           }
-          */
+          
         }
       }
     }
@@ -167,7 +167,7 @@ $(function() {
      //texture.magFilter = texture.minFilter =  THREE.LinearFilter;
 
       //var material = new THREE.MeshBasicMaterial( { map: texture, doubleSided: true,  wireframe:false })
-      var material = new THREE.MeshBasicMaterial( {color: 0xFFFFFF,  wireframe:false, overdraw:true })
+      
 
 
       // generate geometry
@@ -187,6 +187,18 @@ $(function() {
     document.addEventListener( 'touchstart', onDocumentTouchStart, false );
     document.addEventListener( 'touchmove', onDocumentTouchMove, false );
   }
+  // - - - - - - - - - - - - - - - - KICKOFF PARTICLES - - - - - - - - - - - - - - - - -
+  function kickOffParticles (){
+    if (!running) {
+      running = true;
+      
+      for (var k in particles){
+       var p = particles[k];
+       p.setblowAway(true);
+      }
+    }
+  }
+
 
   // - - - - - - - - - - - - - - - - UPDATE PARTICLES - - - - - - - - - - - - - - - - -
 
@@ -194,12 +206,6 @@ $(function() {
     
     for (var k in particles){
        var p = particles[k];
-
-      // blow 'em away
-      if (counter== START_FRAME) {
-        //particles[k].running = true;
-        p.setblowAway(true);
-      }
       
       sheets[k].position = particles[k].position;
       sheets[k].rotation = particles[k].rotation;
@@ -238,13 +244,13 @@ $(function() {
 
    
      
-    if (counter < 200){
+    //if (counter < 200){
       requestAnimationFrame( animate );
       render();
-    } else if (counter == 250){
-        console.log("stop rendering");
+    //} else if (counter == 250){
+        //console.log("stop rendering");
 
-    }
+    //}
   }
 
   function render() {
@@ -257,7 +263,8 @@ $(function() {
   }
 
   function onDocumentMouseMove(event) {
-
+    if (mouse2D.x < 0 && mouse2D.y < 0  )  kickOffParticles();
+   console.log (' mouse2D.x:' +  mouse2D.x + '  mouse2D.y: '+ mouse2D.y);
     mouse2D.x = ( event.clientX / window.innerWidth ) * 2 - 1;
     mouse2D.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
