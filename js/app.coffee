@@ -10,11 +10,15 @@ $ ->
     fillWindow '#hokusai'
 
   # Smooth-scroll.
-  $('a.smooth').bind 'click', (event) ->
+  smoothScroll = (target) ->
     $('body').stop().animate
-      scrollTop: $($(@).attr('href')).offset().top
+      scrollTop: $(target).offset().top
     , 400
     event.preventDefault()
+
+  $('a.smooth').bind 'click', (event) ->
+    smoothScroll $(@).attr 'href'
+    history.pushState { path: @path }, '', @href
 
   # A list of people working at Paper Cavalier.
   people = [
