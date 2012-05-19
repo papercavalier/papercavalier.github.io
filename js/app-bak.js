@@ -24,6 +24,7 @@ $(function() {
 
   init();
   animate();
+  kickOffParticles();
   
   function init() {
 
@@ -244,13 +245,13 @@ $(function() {
 
    
      
-    //if (counter < 200){
+    if (counter < 200){
       requestAnimationFrame( animate );
       render();
-    //} else if (counter == 250){
+    } else if (counter == 250){
         //console.log("stop rendering");
 
-    //}
+    }
   }
 
   function render() {
@@ -263,7 +264,7 @@ $(function() {
   }
 
   function onDocumentMouseMove(event) {
-    if (mouse2D.x < 0 && mouse2D.y < 0  )  kickOffParticles();
+    //if (mouse2D.x < 0 && mouse2D.y < 0  )  kickOffParticles();
    console.log (' mouse2D.x:' +  mouse2D.x + '  mouse2D.y: '+ mouse2D.y);
     mouse2D.x = ( event.clientX / window.innerWidth ) * 2 - 1;
     mouse2D.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
@@ -279,7 +280,7 @@ $(function() {
 
       mouse2D.x = event.touches[ 0 ].pageX - SCREEN_WIDTH_HALF;
       mouse2D.y = event.touches[ 0 ].pageY - SCREEN_HEIGHT_HALF;
-      if (mouse2D.x < 0 && mouse2D.y < 0  )  kickOffParticles();
+      //if (mouse2D.x < 0 && mouse2D.y < 0  )  kickOffParticles();
     }
 
   }
