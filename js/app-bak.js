@@ -279,7 +279,7 @@ $(function() {
 
       mouse2D.x = event.touches[ 0 ].pageX - SCREEN_WIDTH_HALF;
       mouse2D.y = event.touches[ 0 ].pageY - SCREEN_HEIGHT_HALF;
-
+      if (mouse2D.x < 0 && mouse2D.y < 0  )  kickOffParticles();
     }
 
   }
