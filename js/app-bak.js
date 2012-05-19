@@ -7,26 +7,18 @@ $(function() {
   SHEET_SUBDIVISIONS = 7,
   DISPLACE_DEPTH = 1,
   START_FRAME = 40,
-  TEXTURE_PATH = "images/paper_64x64.png",
+  //TEXTURE_PATH = "/images/paper_64x64.png",
   //START_POSITION = new THREE.Vector3 (-60,-25,0),
-  START_POSITION = new THREE.Vector3 (-50,40,0),
+  START_POSITION = new THREE.Vector3 (-58,-35,0),
   
 
-  camera, scene, renderer, projector, orbitRadius, theta, counter, particles, sheets;
+  camera, scene, renderer, counter, particles, sheets;
 
   window.DRAG = .95;
-  window.GRAVITY = .005;
+  window.GRAVITY = .0035;
 
-  var names= ['Aaron', 'Amanda', 'Angela','Aitor', 'Eric','Genis','Genn','Hakan','Nas','Nelson','Rob'];
-
-  var $portraits = $('#portraits');
-  var $portraitImages = $('#portrait-images');
-  var $portraitCovers = $('#portrait-covers');
-
-  addPortraits ();
-
-  SCREEN_WIDTH = $("body").width(),
-  SCREEN_HEIGHT = $("body").height(),
+  SCREEN_WIDTH = 1000,
+  SCREEN_HEIGHT = 570,
   SCREEN_WIDTH_HALF = SCREEN_WIDTH  / 2,
   SCREEN_HEIGHT_HALF = SCREEN_HEIGHT / 2,
 
@@ -40,21 +32,19 @@ $(function() {
    
     //CAMERA
     camera = new THREE.PerspectiveCamera( 35, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000 );
-    camera.position.y = -5;
+    camera.position.y = 0;
     camera.position.x = 0;
-    camera.position.z = 350; //150
+    camera.position.z = 150;
     scene.add( camera );
 
     //RENDERER
-    projector = new THREE.Projector();
+    //projector = new THREE.Projector();
     renderer = new THREE.CanvasRenderer();
     renderer.sortObjects = false;
     renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 
     //DOM
-    var container = document.createElement('div');
-    $("#hokusai").append(container);
-    container.appendChild( renderer.domElement );
+    $("#hokusai .container .frame").before( renderer.domElement );
 
 
     orbitRadius = 100;
@@ -173,8 +163,8 @@ $(function() {
       p.rotation.z = Math.random() * .4;
       p.ID = k;
     
-      var texture =THREE.ImageUtils.loadTexture( TEXTURE_PATH);
-      texture.magFilter = texture.minFilter =  THREE.LinearFilter;
+      //var texture =THREE.ImageUtils.loadTexture( TEXTURE_PATH);
+     //texture.magFilter = texture.minFilter =  THREE.LinearFilter;
 
       //var material = new THREE.MeshBasicMaterial( { map: texture, doubleSided: true,  wireframe:false })
       var material = new THREE.MeshBasicMaterial( {color: 0xFFFFFF,  wireframe:false, overdraw:true })
@@ -248,7 +238,7 @@ $(function() {
 
    
      
-    if (counter < 2500){
+    if (counter < 200){
       requestAnimationFrame( animate );
       render();
     } else if (counter == 250){
@@ -261,11 +251,6 @@ $(function() {
     //console.log("app.js: render()");
     updateParticles();
 
-    //camera.position.x += ( mouse2D.x - camera.position.x ) * .05;
-    //camera.position.y += ( - mouse2D.y + 200 - camera.position.y ) * .05;
-
-    //orbit
-    theta += 0.8;
     camera.lookAt( scene.position );
 
     renderer.render( scene, camera );
@@ -303,70 +288,4 @@ $(function() {
 
     }
   }
-
-  function addPortraits() {
-    
-
-    for (var k in names){
-      $portraitImages.append('<img class="portrait" src="images/portraits/'+names[k]+'.jpg" />');
-      $portraitCovers.append('<div class="portrait-cover"><p>'+names[k]+'</p></div>');
-    }
-    var h = Math.ceil(names.length /4)*350;
-    $portraits.css('height', h);
-  }
-  
-  $(window).scroll(function () {
-   
-
-    //portrait covers fade in & fade out
-    var portraitsHeight = $portraits.height();
-    var y = $portraits.position().top;
-    var offset = $(window).scrollTop() - y + $(window).height()/2;
-    var portraitsPct = offset/portraitsHeight;
-
-    portraitsPct *=  1.2;
-    //console.log('app.js: window.scroll: portraitsPct: '+Math.floor (portraitsPct*100));
-
-    var emptyPortraits = 4 - names.length%4;
-
-    var c = 0;
-    $portraitCovers.children().each(function () {
-      $(this).css ('opacity', fadeMe (portraitsPct, 2, c/(names.length+emptyPortraits)));
-      c ++;
-    });
-
-    //counter = $(window).scrollTop();
-    //counter++;
-    //console.log('app.js: window.scroll: counter: '+ counter);
-    //animate();
-  });
-
-  $(window).resize(function() {
-    //console.log('$(window).resize: width:' +$(window).width() + ' height: '+$(window).height())
-    START_POSITION = new THREE.Vector3 (0,0,0);
-
-    SCREEN_WIDTH = $(window).width();
-    SCREEN_HEIGHT = $(window).height();
-    SCREEN_WIDTH_HALF = SCREEN_WIDTH  / 2;
-    SCREEN_HEIGHT_HALF = SCREEN_HEIGHT / 2;
-
-    renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-
-  });
-
-  var fadeMe = function (pct, fadeSteps, startFade) {
-    fadeSteps = fadeSteps/100;
-    startFadeOut = startFade+fadeSteps;
-    var o;
-      if (pct > startFade && pct < startFade+fadeSteps){
-        o = (pct - startFade)/fadeSteps;
-      } else if (pct >= startFade+fadeSteps && pct < startFadeOut) {
-        o = 1;
-      } else if (pct >= startFadeOut && pct < startFadeOut+fadeSteps) {
-        o = 1-(pct - startFadeOut)/fadeSteps;
-      } else {
-        o = 0;
-      }
-      return o;
-  };
 });

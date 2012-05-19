@@ -43,7 +43,7 @@
 
 		<script>
 
-			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+			//if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
 			var container, stats;
 			var camera, scene, renderer, particles, geometry, materials = [], parameters, i, h, color;
@@ -95,11 +95,12 @@
 					particles.rotation.x = Math.random() * 6;
 					particles.rotation.y = Math.random() * 6;
 					particles.rotation.z = Math.random() * 6;
-
 					scene.add( particles );
+					
 
 				}
-
+				
+				console.log (scene);
 				renderer = new THREE.WebGLRenderer();
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				container.appendChild( renderer.domElement );
