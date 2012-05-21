@@ -17,7 +17,6 @@ p {
 section {
   .container {
     padding-top: 4em;
-
   }
 }
 a {
@@ -136,6 +135,7 @@ a:hover {
 
   .container {
     min-height:inherit;
+    padding-bottom:3em;
   }
 
   #people {
@@ -179,7 +179,7 @@ a:hover {
 }
 
 footer {
-  background: #222;
+  background: #222 url(/images/section2_bg.jpg);
   padding: 60px 0 75px;
 
   ul {
@@ -193,6 +193,11 @@ footer {
       font-size: 2.5em;
       line-height: 1.5;
       display: inline-block;
+      margin: 0 1em 0 0;
     }
+  }
+  .small-text {
+    font-size: 1em;
+    text-shadow:none;
   }
 }
