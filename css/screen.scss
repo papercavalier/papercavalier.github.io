@@ -7,6 +7,7 @@ h1, p {
 }
 
 p {
+  color:#4e4e4e;
   font-size: 3em;
   line-height: 1.5em;
   margin-bottom: 1em;
@@ -18,10 +19,14 @@ section {
 
   }
 }
+a {
+    color: #810024;
+}
+a:hover {
+    text-decoration: none;
+    color: #000e2d;
 
-
-
-
+}
 
 #brand {
 
@@ -61,25 +66,34 @@ section {
     }
   }
 
-  a {
-    color: #810024;
-    margin-left: 12px;
-  }
-  a:hover {
-    text-decoration: none;
-    color: #000e2d;
-
-  }
+  
 }
 
 #company {
+  background: #2e2e2e url(/images/section2_bg.jpg);
+
+  .container {
+    min-height:inherit;
+    background: white;
+    p {
+
+    padding-left:3em;
+    padding-right:3em;
+    }
+  }
+  .shadow {
+  -moz-box-shadow:    7px 4px 10px -5px #000;
+  -webkit-box-shadow: 7px 4px 10px -5px #000;
+  box-shadow:         7px 4px 10px -5px #000;
+}
 }
 
 #about-us {
-  background: #eee;
-
+  background: #2e2e2e url(/images/section2_bg.jpg);
   .container {
-    padding: 60px 0 210px;
+    min-height:inherit;
+    background: white;
+    
   }
 
   #people {
