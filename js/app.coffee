@@ -24,7 +24,7 @@ $ ->
   people = [
     {
       name: 'Aaron',
-      blurb: 'lorem ipsum',
+      blurb: 'Aaron is a bit of a company everyman, having worn most of the hats during a storied tenure with Paper Cavalier. A voracious consumer of mixed media, his impressive knowledge of obscure corners of American culture well exceeds his years.'
     }
   , {
       name: 'Amanda',
