@@ -24,19 +24,19 @@ $ ->
   people = [
     {
       name: 'Aaron',
-      blurb: 'Aaron is a bit of a company everyman, having worn most of the hats during a storied tenure with Paper Cavalier. A voracious consumer of mixed media, his impressive knowledge of obscure corners of American culture well exceeds his years.'
+      blurb: '<i>Aaron</i> is a bit of a company everyman, having worn most of the hats during a storied tenure with Paper Cavalier. A voracious consumer of mixed media, his impressive knowledge of obscure corners of American culture well exceeds his years.'
     }
   , {
       name: 'Amanda',
-      blurb: 'lorem ipsum'
+      blurb: 'A native of Brooklyn, <i>Amanda</i> has been buying and selling books since 2007. When she’s not busy fantasizing about her dream library, she can be found swimming in the ocean, turning over rocks for bugs, and squeezing cats.'
     }
   , {
       name:  'Angela',
-      blurb: 'lorem ipsum'
+      blurb: '<i>Angela</i> has spent the last 15 years working in various bookstores and archives in New York and the Midwest. She is interested in ethnographic recordings, music/sound archives, and all forms of printed matter.'
     }
   , {
       name:  'Eric',
-      blurb: 'lorem ipsum'
+      blurb: '<i>Eric’s</i> mysterious background begins at an undisclosed university and ends with his evasive literary interests.'
     }
   , {
       name:  'Genis',
@@ -44,18 +44,30 @@ $ ->
     }
   , {
       name:  'Genn',
-      blurb: 'lorem ipsum'
+      blurb: '<i>Genevieve</i> has over ten years experience working with rare books, second hand books, and special collections in the New York City area. She specializes in codicology and paleography, with an interest in unusual printing and binding.'
     }
   , {
-      name:  'Nas',
-      blurb: 'lorem ipsum'
+      name:  'Naz',
+      blurb: "<i>Naz</i> is a freelance graphic designer with a degree in fine arts. When he's not busy publishing new designs with Adobe's Creative Suite, Naz manages the Near Fine warehouse. Oh yeah, and he's a pretty mean tattoo artist."
     }
   , {
       name:  'Nelson',
-      blurb: 'lorem ipsum'
+      blurb: '<i>Nelson</i> is a founding partner in Paper Cavalier. He has worked in the sphere of book selling since 1999'
     }
   , {
       name:  'Rob',
+      blurb: '<i>Robert</i> has a BFA from the School of Visual Arts in New York where he studied cartooning and bookbinding as an art form. He specializes in graphic novels and childrenʼs books.'
+    }
+  , {
+      name:  'Stacey',
+      blurb: 'An avid reader of beatnik authors, <i>Stacey loves</i> to keep it simple and has been doing so for the New York shipping office. She originally hails from the midwest.'
+    }
+  , {
+      name:  'Dallis',
+      blurb: 'Rumor has it that <i>Dallis</i> has a degree in astronomy - or graphic design. She has an uncanny penchant for finding unusual book covers which she curates for her blog, "Sandra Coppertop."'
+    }
+    {
+       name: 'Aitor',
       blurb: 'lorem ipsum'
     }
   ]
