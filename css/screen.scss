@@ -18,27 +18,10 @@ section {
   }
 }
 
-#hokusai {
-  
+#brand {
   color: #aaa;
   background: #333;
-  
-  canvas {
-    position:relative;
-    top: 0;
-    left:-40px;
-    /*background: url(/images/app8.jpg) no-repeat;*/
-  }
-  .frame {
-    display:block;
-    position:relative;
-    top: -570px;
-    left:-40px;
-    width: 1000px;
-    height:620px;
-    /*background: url(/images/frame01.png);*/
 
-  }
   h1 {
     color: #fff;
     font-size: 6em;

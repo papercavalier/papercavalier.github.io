@@ -4,10 +4,10 @@ $ ->
   # Set minimum page height of the Hokusai page to the window height.
   (fillWindow = (sel) ->
     $(sel).css 'min-height', $(window).height()
-  )('#hokusai')
+  )('section')
 
   $(window).resize ->
-    fillWindow '#hokusai'
+    fillWindow 'section'
 
   # Smooth-scroll.
   smoothScroll = (target) ->
