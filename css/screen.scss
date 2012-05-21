@@ -15,6 +15,7 @@ p {
 section {
   .container {
     padding-top: 30px;
+
   }
 }
 
@@ -26,45 +27,47 @@ section {
 
   color: #aaa;
   background: #CCC url(/images/bg.jpg) repeat;
-  text-align:center;
-  
+
   .container {
     margin:auto;
-
+    width: 37em;
+    text-align: center;
+    padding-top: 14em;
 
   }
   .logo {
     display:block;
-
-
-
+    margin:auto;
+    position:relative;
+    left:-2em;
+  }
+  h1.cavalier {
+      color: #000e2d;
   }
   h1 {
+
     color: #810024;
     font-size: 6em;
-    line-height: 1.5em;
-    font-weight:normal;
+    line-height: .5em;
+    font-weight:400;
     letter-spacing: -.05em;
 
     display:inline-block;
-
     text-shadow: -.02em -.02em 0.02em white, .02em .02em .02em #666;
-    .cavalier {
-      color: #000e2d;
-    }
+    padding:0;
     .footnote {
       vertical-align:super;
-      font-size:1em;
-}
+      font-size:.5em;
+    }
   }
 
   a {
-    color: #bbb;
+    color: #810024;
     margin-left: 12px;
   }
   a:hover {
     text-decoration: none;
-    color: #810024;
+    color: #000e2d;
 
   }
 }
