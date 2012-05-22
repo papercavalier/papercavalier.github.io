@@ -7,9 +7,10 @@ h1, p {
 }
 
 p {
-  color:dimGray;
-  font-size: 3em;
-  line-height: 1.3em;
+  color: #222;
+  font-size: 2.8em;
+  line-height: 1.1em;
+  letter-spacing: -.04em;
   margin-bottom: 1em;
   text-shadow: 0px 1px 1px white;
 }
@@ -102,11 +103,14 @@ a:hover {
 
 #company {
   #background: #2e2e2e url(/images/section2_bg.jpg);
-  background: #AAAAAA url(/images/bg_main.jpg);
+  #background: #AAAAAA url(/images/bg_main.jpg);
   padding: 4em 0 0 0;
+
+  
 
   border-top: white  solid 1px;
   border-bottom: #BBB solid 1px;
+
   .separator {
     background: url(/images/leaf.png) no-repeat;
     margin:auto;
@@ -116,14 +120,9 @@ a:hover {
     margin-bottom:2em;
   }
   .container {
-   
-    min-height:inherit;
-   
-    p {
+    
+    margin-top: 10%;
 
-    padding-left:3em;
-    padding-right:3em;
-    }
   }
   
 }
@@ -144,10 +143,10 @@ a:hover {
     margin-bottom: 1em;
   }
 
-  #images, #blurbs {
+  #images {
     position: absolute;
   }
-  #images img, .blurb {
+  #images img{
     width: 213px;
     height: 330px;
     background: white;
@@ -157,54 +156,19 @@ a:hover {
     margin: 5px;
 
   }
-  .blurb {
-    display: inline-block;
-    background: url(/images/vignette_portrait.png);
-    vertical-align:top;
-    padding:0;
-    border:8px solid white;
-    -moz-box-shadow:    0px 0px 12px  #000;
-    -webkit-box-shadow: 0px 0px 12px  #000;
-    box-shadow:         0px 0px 12px  #000;
-
-  }
-
-  .blurb p {
-    color:white;
-    text-shadow:1px 1px 4px black;
-
-    padding:3.5em 1.5em 1.5em 1.5em;
-
-    font-size: 1.3em;
-    line-height:1.15em;
-    text-align: left;
-
-    position:relative;
-    bottom: 0;
-  }
-
-  .blurb, img {
-    margin: 0 2px 2px 0;
-    #border-right: white  solid 1px;
-    #border-bottom: #BBB solid 1px;
-
-  }
+ 
 }
 
 footer {
   background: #222 url(/images/footer_bg.png);
   padding: 2em 0 1em 0;
   border-top: white  solid 1px;
-  border-bottom: #BBB solid 1px;
-  margin:0 0 2em;
 
    -moz-box-shadow:    0px 0px 12px  #000;
     -webkit-box-shadow: 0px 0px 12px  #000;
     box-shadow:         0px 0px 12px  #000;
 
   ul {
-    padding-left:3em;
-    padding-right:3em;
     list-style-type:none;
     margin: 0;
  
@@ -227,9 +191,13 @@ footer {
     }
 
   }
-  .small-text {
-    margin: 1.5em 0 0 0;
-    font-size: 1.3em;
-    text-shadow: 0 0 2px black;
+  p.small-text {
+    color: #555;
+    font-size: 1em;
+    letter-spacing: -.08em;
+    font-family: Courier;
+    text-shadow: none;
+    text-align:center;
+    text-shadow: 0em 0em .5em #000;
   }
 }
