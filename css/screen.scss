@@ -37,7 +37,7 @@ a:hover {
 
   color: #aaa;
   background: #CCC url(/images/bg2.jpg) repeat;
-  border-bottom: #BBB solid 1px;
+  #border-bottom: #BBB solid 1px;
 
   .vignette {
     position:absolute;
@@ -104,12 +104,13 @@ a:hover {
 #company {
   #background: #2e2e2e url(/images/section2_bg.jpg);
   #background: #AAAAAA url(/images/bg_main.jpg);
+  background: #CCC url(/images/bg2.jpg) repeat;
   padding: 4em 0 0 0;
 
   
 
-  border-top: white  solid 1px;
-  border-bottom: #BBB solid 1px;
+  #border-top: white  solid 1px;
+  #border-bottom: #BBB solid 1px;
 
   .separator {
     background: url(/images/leaf.png) no-repeat;
@@ -128,9 +129,10 @@ a:hover {
 }
 
 #about-us {
-  background: #AAAAAA url(/images/bg_main.jpg);
-  border-top: white  solid 1px;
-  border-bottom: #BBB solid 1px;
+  #background: #AAAAAA url(/images/bg_main.jpg);
+  background: #CCC url(/images/bg2.jpg) repeat;
+  #border-top: white  solid 1px;
+  #border-bottom: #BBB solid 1px;
   padding: 6em 0;
 
   .container {
