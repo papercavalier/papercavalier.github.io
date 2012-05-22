@@ -14,11 +14,6 @@ p {
   text-shadow: 0px 1px 1px white;
 }
 
-section {
-  .container {
-    padding-top: 4em;
-  }
-}
 a {
     color: #c30d3f;
     #font-weight: 600;
@@ -38,6 +33,7 @@ a:hover {
 
 #brand {
 
+
   color: #aaa;
   background: #CCC url(/images/bg2.jpg) repeat;
   border-bottom: #BBB solid 1px;
@@ -56,6 +52,8 @@ a:hover {
   }
 
   .container {
+    position: relative;
+    z-index:2;
     #margin:auto;
     text-align: center;
     padding-top: 12%;
@@ -105,6 +103,8 @@ a:hover {
 #company {
   #background: #2e2e2e url(/images/section2_bg.jpg);
   background: #AAAAAA url(/images/bg_main.jpg);
+  padding: 4em 0 0 0;
+
   border-top: white  solid 1px;
   border-bottom: #BBB solid 1px;
   .separator {
@@ -132,10 +132,11 @@ a:hover {
   background: #AAAAAA url(/images/bg_main.jpg);
   border-top: white  solid 1px;
   border-bottom: #BBB solid 1px;
+  padding: 6em 0;
 
   .container {
     min-height:inherit;
-    padding-bottom:3em;
+    
   }
 
   #people {
@@ -146,17 +147,26 @@ a:hover {
   #images, #blurbs {
     position: absolute;
   }
-  #images img {
-    
+  #images img, .blurb {
+    width: 213px;
+    height: 330px;
+    background: white;
+    padding: 3px;
+    border: solid 1px #CCC;
+    overflow:hidden;
+    margin: 5px;
 
   }
   .blurb {
     display: inline-block;
-    width: 233px;
-    height: 350px;
     background: url(/images/vignette_portrait.png);
-    overflow:hidden;
     vertical-align:top;
+    padding:0;
+    border:8px solid white;
+    -moz-box-shadow:    0px 0px 12px  #000;
+    -webkit-box-shadow: 0px 0px 12px  #000;
+    box-shadow:         0px 0px 12px  #000;
+
   }
 
   .blurb p {
@@ -175,29 +185,51 @@ a:hover {
 
   .blurb, img {
     margin: 0 2px 2px 0;
+    #border-right: white  solid 1px;
+    #border-bottom: #BBB solid 1px;
+
   }
 }
 
 footer {
-  background: #222 url(/images/section2_bg.jpg);
-  padding: 60px 0 75px;
+  background: #222 url(/images/footer_bg.png);
+  padding: 2em 0 1em 0;
+  border-top: white  solid 1px;
+  border-bottom: #BBB solid 1px;
+  margin:0 0 2em;
+
+   -moz-box-shadow:    0px 0px 12px  #000;
+    -webkit-box-shadow: 0px 0px 12px  #000;
+    box-shadow:         0px 0px 12px  #000;
 
   ul {
-    list-style-type: none;
+    padding-left:3em;
+    padding-right:3em;
+    list-style-type:none;
     margin: 0;
-    padding: 0;
+ 
 
     font-family: 'Crimson Text', serif;
 
     li {
       font-size: 2.5em;
-      line-height: 1.5;
-      display: inline-block;
-      margin: 0 1em 0 0;
+      line-height: 1.5em;
+      #display: inline-block;
+      a {
+        color: #aaa;
+         text-shadow:0.03em 0.03em 0.1em black;
+         &:hover {
+          color: white;
+          text-decoration:none;
+         }
+      }
+
     }
+
   }
   .small-text {
-    font-size: 1em;
-    text-shadow:none;
+    margin: 1.5em 0 0 0;
+    font-size: 1.3em;
+    text-shadow: 0 0 2px black;
   }
 }
