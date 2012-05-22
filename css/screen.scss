@@ -1,7 +1,9 @@
 ---
 ---
 @import url(http://fonts.googleapis.com/css?family=Crimson+Text:400,600,400italic,600italic);
-
+body {
+  background: #CCC url(/images/bg2.jpg) repeat;
+}
 h1, p {
   font-family: 'Crimson Text', serif;
 }
@@ -36,7 +38,6 @@ a:hover {
 
 
   color: #aaa;
-  background: #CCC url(/images/bg2.jpg) repeat;
   #border-bottom: #BBB solid 1px;
 
   .vignette {
@@ -102,9 +103,17 @@ a:hover {
 }
 
 #company {
+  
+    background: url(/images/section2-bg.png) no-repeat center center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  
+  
   #background: #2e2e2e url(/images/section2_bg.jpg);
   #background: #AAAAAA url(/images/bg_main.jpg);
-  background: #CCC url(/images/bg2.jpg) repeat;
+  #background: #CCC url(/images/bg2.jpg) repeat;
   padding: 4em 0 0 0;
 
   
@@ -129,8 +138,6 @@ a:hover {
 }
 
 #about-us {
-  #background: #AAAAAA url(/images/bg_main.jpg);
-  background: #CCC url(/images/bg2.jpg) repeat;
   #border-top: white  solid 1px;
   #border-bottom: #BBB solid 1px;
   padding: 6em 0;
@@ -164,17 +171,11 @@ a:hover {
 }
 
 footer {
-  #background: #222 url(/images/footer_bg.png);
-  background: #CCC url(/images/bg2.jpg) repeat;
-
-  
   
   div.wrap {
     border-top: white  solid 1px;
     background: rgba(0, 0, 0, 0.8);
   }
-
-
 
   ul {
     padding: 2em 0 1em 0;
