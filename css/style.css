@@ -1,0 +1,64 @@
+body {
+  background: url('../img/bg-2.png');
+  color: #dfdfdf;
+  font-family: 'Inder', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+}
+a, a:hover {
+  color: #f80046;
+}
+body>.container {
+   padding-bottom: 6em;
+   padding-top: 6em;
+}
+header {
+  background: url('../img/bg.jpg');
+  box-shadow: inset 0 0 150px #777;
+  text-align: center;
+}
+header h1 {
+  background: url(../img/logo.png);
+  display: inline-block;
+  height: 265px;
+  width: 265px;
+}
+header h1 span {
+  display: none;
+}
+#about {
+  background: rgba(0, 0, 0, 0.2);
+}
+#about .container {
+  padding-bottom: 3em;
+  padding-top: 6em;
+}
+#about a.thumbnail {
+  border-width: 0;
+}
+#about .img-polaroid {
+  background: #dfdfdf;
+  transition: all 0.4s ease-in;
+  -moz-transition: all 0.4s ease-in;
+  -webkit-transition: all 0.4s ease-in;
+}
+#about li:nth-child(7) .img-polaroid:hover {
+  transform:rotate(360deg);
+  -moz-transform:rotate(360deg);
+  -webkit-transform:rotate(360deg);
+}
+#contact {
+  margin-top: 4em;
+}
+#contact address i {
+  color: #dfdfdf;
+  font-size: 20px;
+  padding-right: 8px;
+}
+
+footer {
+   background: rgba(0, 0, 0, 0.4);
+   padding-top: 2em;
+   padding-bottom: 2em;
+   text-align: center;
+}
