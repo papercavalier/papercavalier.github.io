@@ -15,5 +15,5 @@ $(function() {
     $('#death').text('about ' + (Math.random() * 7 + 6).toFixed(1));
   }
   calculateDeath();
-  setInterval(calculateDeath, 15000);
+  setInterval(calculateDeath, 30000);
 });
