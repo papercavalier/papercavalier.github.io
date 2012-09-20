@@ -1,7 +1,6 @@
 $(function() {
   var $window = $(window),
       $logo   = $('header h1'),
-      calculateDeathOfPrint,
       setup;
 
   (setup = function() {
@@ -19,12 +18,6 @@ $(function() {
     }, 400);
     event.preventDefault();
   });
-
-  (calculateDeathOfPrint = function() {
-    var years = (Math.random() * 7 + 3).toFixed(1);
-    $('#death').text('about ' + years);
-  })();
-  setInterval(calculateDeathOfPrint, 30000);
 
   $window.scroll(function() {
     if($window.scrollTop() > $window.height() + 90) {
