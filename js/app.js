@@ -29,4 +29,6 @@ $(function() {
       $window.unbind('scroll');
     }
   });
+
+  $('a.thumbnail').tooltip();
 });
