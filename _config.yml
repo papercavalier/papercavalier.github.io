@@ -1,7 +1,0 @@
-server:   true
-auto:     true
-exclude:
-  - CNAME
-  - Gemfile
-  - Gemfile.lock
-  - src
