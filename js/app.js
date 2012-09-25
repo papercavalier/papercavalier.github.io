@@ -14,7 +14,7 @@ $(function() {
 
   $('header a').click(function(event) {
     $('html, body').stop().animate({
-        scrollTop: $($(this).attr('href')).offset().top - 125
+        scrollTop: $($(this).attr('href')).offset().top
     }, 400);
     event.preventDefault();
   });
