@@ -37,11 +37,3 @@ a.thumbnail {
   background:    -moz-linear-gradient(top, #303030 0%, #181818 20%, #000 100%);
   background: -webkit-linear-gradient(top, #303030 0%, #181818 20%, #000 100%);
 }
-@media (max-width: 480px) {
-  .container {
-    padding-top: 2em;
-  }
-  .container .row:nth-child(2) {
-    display: none;
-  }
-}
