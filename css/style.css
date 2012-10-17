@@ -17,6 +17,9 @@ h1 {
   color: #dfdfdf;
   padding-right: 6px;
 }
+#contact address a:first-child i {
+  padding: 0;
+}
 #contact i {
   line-height: 1.3;
 }
