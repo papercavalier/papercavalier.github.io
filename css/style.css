@@ -23,8 +23,15 @@ h1 {
 a.thumbnail {
   border-width: 0;
 }
+.dallis {
+          transform: rotate(-6deg);
+       -o-transform: rotate(-6deg);
+      -ms-transform: rotate(-6deg);
+     -moz-transform: rotate(-6deg);
+  -webkit-transform: rotate(-6deg);
+}
 .tooltip {
-  font-size: 13px;
+  font-size: 15px;
 }
 .tooltip.in {
   opacity: 0.95;
@@ -33,6 +40,7 @@ a.thumbnail {
 .tooltip-inner {
   box-shadow: 0px 3px 10px #111;
   background:         linear-gradient(top, #303030 0%, #181818 20%, #000 100%);
+  background:      -o-linear-gradient(top, #303030 0%, #181818 20%, #000 100%);
   background:     -ms-linear-gradient(top, #303030 0%, #181818 20%, #000 100%);
   background:    -moz-linear-gradient(top, #303030 0%, #181818 20%, #000 100%);
   background: -webkit-linear-gradient(top, #303030 0%, #181818 20%, #000 100%);
