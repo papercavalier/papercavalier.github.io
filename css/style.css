@@ -11,6 +11,7 @@ a, a:hover {
   padding-top: 6em;
 }
 h1 {
+  font-weight: 500;
   margin-bottom: 2em;
 }
 #contact address a i {
