@@ -14,6 +14,15 @@ h1 {
   font-weight: 500;
   margin-bottom: 2em;
 }
+#contact address {
+  position:relative;
+}
+#contact address img {
+  height: 96px;
+  left: -77px;
+  position: absolute;
+  top: -80px;
+}
 #contact address a i {
   color: #dfdfdf;
   padding-right: 6px;
