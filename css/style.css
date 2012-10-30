@@ -1,8 +1,17 @@
 body {
-  background: url('../img/bg-2.png');
-  color: #dfdfdf;
   font: 19px 'Inder', sans-serif;
   line-height: 1.5;
+}
+body#about {
+  background: url('../img/bg-2.png');
+  color: #dfdfdf;
+}
+body#jobs {
+  background: url(../img/books.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 a, a:hover {
   color: #f80046;
