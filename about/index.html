@@ -1,229 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>About Paper Cavalier</title>
-    <meta name="description" content="About Paper Cavalier">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/font-awesome.css" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css?family=Inder" rel="stylesheet" type="text/css">
-    <style type="text/css">
-      body {
-        background: url('../img/bg-2.png');
-        color: #dfdfdf;
-        font: 19px 'Inder', sans-serif;
-      }
-      a, a:hover {
-        color: #f80046;
-      }
-      .container {
-        padding-top: 4em;
-      }
-      h1 {
-        font-weight: 500;
-        margin-bottom: 2em;
-      }
-      #contact {
-        position:relative;
-      }
-      #arrow {
-        height: 96px;
-        left: -77px;
-        position: absolute;
-        top: -80px;
-      }
-      #contact address a i {
-        color: #dfdfdf;
-        padding-right: 6px;
-      }
-      #contact address a:first-child i {
-        padding: 0;
-      }
-      #contact i {
-        line-height: 1.3;
-      }
-      a.thumbnail {
-        border-width: 0;
-      }
-      .rotate {
-                transform: rotate(-6deg);
-             -o-transform: rotate(-6deg);
-            -ms-transform: rotate(-6deg);
-           -moz-transform: rotate(-6deg);
-        -webkit-transform: rotate(-6deg);
-                transition-delay: 5s;
-             -o-transition-delay: 5s;
-            -ms-transition-delay: 5s;
-           -moz-transition-delay: 5s;
-        -webkit-transition-delay: 5s;
-      }
-      .tooltip {
-        font-size: 15px;
-      }
-      .tooltip.in {
-        opacity: 0.97;
-        filter: alpha(opacity=97);
-      }
-      .tooltip-inner {
-        box-shadow: 0px 3px 10px #111;
-        background:         linear-gradient(top, #303030 0%, #181818 20%, #000 100%);
-        background:      -o-linear-gradient(top, #303030 0%, #181818 20%, #000 100%);
-        background:     -ms-linear-gradient(top, #303030 0%, #181818 20%, #000 100%);
-        background:    -moz-linear-gradient(top, #303030 0%, #181818 20%, #000 100%);
-        background: -webkit-linear-gradient(top, #303030 0%, #181818 20%, #000 100%);
-      }
-    </style>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-      $(function() {
-        $('.thumbnail').tooltip();
-        $('.thumbnails li:nth-child(10) img').addClass('rotate');
-      });
-    </script>
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-12537845-1']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="offset1 span11">
-          <h1>
-            Hello. We are <a href="../">Paper Cavalier</a>.
-            We specialise in books, situationism and rocket science.
-          </h1>
-        </div>
-      </div>
-      <!-- first row -->
+	<head>
+		<meta charset="utf-8">
+		<title>About Paper Cavalier</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+		<link rel="stylesheet" href="//papercavalier.com/fonts/logo.css">
+			<style type="text/css">
+				body {
+					background: #d62826;
+					color: #fff;
+					font-family: "proxima-nova", sans-serif;
+					font-size: 30px;
+		        	line-height: 1.5;
+				}
+				a {
+					color :#ccc;
+				}
+				a:hover {
+					color: #fff;
+				}
+				.container {
+					margin-top: 4em;
+				}
+				.logo {
+					margin-top: 1em;
+				}
+				.icon-logo {
+					font-size: 10em;
+				}
+				.icon-logo:hover {
+					text-decoration: none;
+				}
+				.main p {
+					margin-bottom: 1em;
+				}
+				.main .thumbnails {
+					margin-top: 2em;
+				}
+				.main address {
+					margin-top: 1em;
+					margin-bottom: 3em;
+					line-height: 1;
+				}
+				a.thumbnail {
+					border-width: 0;
+				}
+				.tooltip {
+					font-size: 16px;
+				}
+			</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="logo offset1 span4">
+					<a href="/"><i class="icon-logo"></i></a>
+				</div>
+				<!-- first row -->
 
-      <div class="row">
-        <div id="contact" class="offset1 span3">
-          <img id="arrow" src="../img/arrow.png" alt="arrow">
-          <address>
-            <a href="http://gloss.papercavalier.com"><i class="icon-tumblr"></i><a>
-            <a href="http://twitter.com/papercavalier"><i class="icon-twitter"></i><a>
-            <a href="https://github.com/papercavalier"><i class="icon-github-sign"></i></a>
-            <a href="mailto:info@papercavalier.com"><i class="icon-envelope-alt"></i></a>
-          </address>
-          <address>
-            87 Richardson Street
-            <br>
-            2nd Floor
-            <br>
-            Brooklyn, NY 11211
-            <br>
-            <abbr title="Phone"><i class="icon-phone"></i></abbr> (718) 389 6361
-          </address>
-          <address>
-            42 Redchurch St
-            <br>
-            London E2 7DP
-            <br>
-            <abbr title="Phone"><i class="icon-phone"></i></abbr> (20) 7739 8172
-          </address>
-        </div>
-        <!-- contact -->
+				<div class="main span7">
+					 <p>
+					 	We are an independent bookstore. We <a href="http://www.nearfine.com">run an Amazon automaton</a>, <a href="http://part.ly">compare prices</a> and <a href="http://isbn.io">build catalogues</a>. We specialise in situationism and the rocket science of metadata aggregration.
+					</p>
+					<p>
+						We are based in London and New York.
+					 </p>
+					<ul class="thumbnails">
+						<li class="span1">
+							<a href="http://hakanensari.com" class="thumbnail" rel="tooltip" title="Hakan Ensari">
+								<img class="img-polaroid" src="/img/profiles/ensari.jpg" alt="Ensari">
+							</a>
+						</li>
+						<li class="span1">
+							<a href="http://nelsonharst.com/" class="thumbnail" rel="tooltip" title="Nelson Harst">
+								<img class="img-polaroid" src="/img/profiles/harst.jpg" alt="Harst">
+							</a>
+						</li>
+						<li class="span1">
+							<a href="http://aitoruria.com.ar" class="thumbnail" rel="tooltip" title="Aitor Uria Saporiti">
+								<img class="img-polaroid" src="/img/profiles/uria.jpg" alt="Uria">
+							</a>
+						</li>
+						<li class="span1">
+							<a href="#" class="thumbnail" rel="tooltip" title="Angela Perez">
+								<img class="img-polaroid" src="/img/profiles/perez.jpg" alt="Perez">
+							</a>
+						</li>
+						<li class="span1">
+							<a href="#" class="thumbnail" rel="tooltip" title="Stacey Wetzel">
+								<img class="img-polaroid" src="/img/profiles/wetzel.jpg" alt="Wetzel">
+							</a>
+						</li>
+						<li class="span1">
+							<a href="#" class="thumbnail" rel="tooltip" title="Joshua Bonilla">
+								<img class="img-polaroid" src="/img/profiles/bonilla.jpg" alt="Bonilla">
+							</a>
+						</li>
+						<li class="span1">
+							<a href="#" class="thumbnail" rel="tooltip" title="Diego Marquez">
+								<img class="img-polaroid" src="/img/profiles/marquez.jpg" alt="marquez">
+							</a>
+						</li>
+						<li class="span1">
+							<a href="#" class="thumbnail" rel="tooltip" title="Robert Barrett">
+								<img class="img-polaroid" src="/img/profiles/barrett.jpg" alt="Barrett">
+							</a>
+						</li>
+						<li class="span1">
+							<a href="#" class="thumbnail" rel="tooltip" title="Amanda Stamford">
+								<img class="img-polaroid" src="/img/profiles/stamford.jpg" alt="Stamford">
+							</a>
+						</li>
+						<li class="span1">
+							<a href="#" class="thumbnail" rel="tooltip" title="Genevieve DeAngelis">
+								<img class="img-polaroid" src="/img/profiles/deangelis.jpg" alt="DeAngelis">
+							</a>
+						</li>
+						<li class="span1">
+							<a href="#" class="thumbnail" rel="tooltip" title="Carlos Niño">
+								<img class="img-polaroid" src="/img/profiles/nino.jpg" alt="Nino">
+							</a>
+						</li>
+						<li class="span1">
+							<a href="#" class="thumbnail" rel="tooltip" title="Mauricio Vega">
+								<img class="img-polaroid" src="/img/profiles/vega.jpg" alt="Vega">
+							</a>
+						</li>
+						<li class="span1">
+							<a href="#" class="thumbnail" rel="tooltip" title="Maria Eugenia Garcia">
+								<img class="img-polaroid" src="/img/profiles/garcia.jpg" alt="Garcia">
+							</a>
+						</li>
+						<li class="span1">
+							<a href="http://nazaradilworth.com" class="thumbnail" rel="tooltip" title="Nazara Dilworth">
+								<img class="img-polaroid" src="/img/profiles/dilworth.jpg" alt="Dilworth">
+							</a>
+						</li>
+						<li class="span1">
+							<a href="#" class="thumbnail" rel="tooltip" title="Brittany Jackson">
+								<img class="img-polaroid" src="/img/profiles/jackson.jpg" alt="Jackson">
+							</a>
+						</li>
+					</ul>
 
-        <div class="offset1 span6">
-          <ul class="thumbnails">
-            <li class="span1">
-              <a href="#" class="thumbnail" rel="tooltip" title="Robert Barrett">
-                <img class="img-polaroid" src="../img/profiles/robert-barrett.jpg" alt="Robert Barrett">
-              </a>
-            </li>
-            <li class="span1">
-            <a href="#" class="thumbnail" rel="tooltip" title="Joshua Bonilla">
-                <img class="img-polaroid" src="../img/profiles/joshua-bonilla.jpg" alt="Joshua Bonilla">
-              </a>
-            </li>
-            <li class="span1">
-              <a href="#" class="thumbnail" rel="tooltip" title="Genevieve DeAngelis">
-                <img class="img-polaroid" src="../img/profiles/genevieve-deangelis.jpg" alt="Genevieve DeAngelis">
-              </a>
-            </li>
-            <li class="span1">
-            <a href="http://nazaradilworth.com" class="thumbnail" rel="tooltip" title="Nazara Dilworth">
-                <img class="img-polaroid" src="../img/profiles/nazara-dilworth.jpg" alt="Nazara Dilworth">
-              </a>
-            </li>
-            <li class="span1">
-              <a href="http://hakanensari.com" class="thumbnail" rel="tooltip" title="Hakan Ensari">
-                <img class="img-polaroid" src="../img/profiles/hakan-ensari.jpg" alt="Hakan Ensari">
-              </a>
-            </li>
-            <li class="span1">
-            <a href="http://historyordeath.com" class="thumbnail" rel="tooltip" title="Aaron Fitzwater">
-                <img class="img-polaroid" src="../img/profiles/aaron-fitzwater.jpg" alt="Aaron Fitzwater">
-              </a>
-            </li>
-            <li class="span1">
-              <a href="http://twitter.com/OMGrundhauser" class="thumbnail" rel="tooltip" title="Eric Grundhauser">
-                <img id="eric" class="img-polaroid" src="../img/profiles/eric-grundhauser.jpg" alt="Eric Grundhauser">
-              </a>
-            </li>
-            <li class="span1">
-              <a href="http://nelsonharst.com/" class="thumbnail" rel="tooltip" title="Nelson Harst">
-                <img class="img-polaroid" src="../img/profiles/nelson-harst.jpg" alt="Nelson Harst">
-              </a>
-            </li>
-            <li class="span1">
-              <a href="#" class="thumbnail" rel="tooltip" title="Brittany Jackson">
-                <img class="img-polaroid" src="../img/profiles/brittany-jackson.jpg" alt="Brittany Jackson">
-              </a>
-            </li>
-            <li class="span1">
-            <a href="http://sandracoppertop.tumblr.com" class="thumbnail" rel="tooltip" title="Dallis Newman">
-                <img class="img-polaroid" src="../img/profiles/dallis-newman.jpg" alt="Dallis Newman">
-              </a>
-            </li>
-            <li class="span1">
-              <a href="#" class="thumbnail" rel="tooltip" title="Angela Perez">
-                <img class="img-polaroid" src="../img/profiles/angela-perez.jpg" alt="Angela Perez">
-              </a>
-            </li>
-            <li class="span1">
-            <a href="#" class="thumbnail" rel="tooltip" title="Amanda Stamford">
-                <img class="img-polaroid" src="../img/profiles/amanda-stamford.jpg" alt="Amanda Stamford">
-              </a>
-            </li>
-            <li class="span1">
-              <a href="http://zeke.templ.in" class="thumbnail" rel="tooltip" title="Ezekiel Templin">
-                <img class="img-polaroid" src="../img/profiles/ezekiel-templin.jpg" alt="Ezekiel Templin">
-              </a>
-            </li>
-            <li class="span1">
-              <a href="http://aitoruria.com.ar" class="thumbnail" rel="tooltip" title="Aitor Uria Saporiti">
-                <img class="img-polaroid" src="../img/profiles/aitor-uria-saporiti.jpg" alt="Aitor Uria Saporiti">
-              </a>
-            </li>
-            <li class="span1">
-              <a href="#" class="thumbnail" rel="tooltip" title="Mauricio Vega">
-                <img class="img-polaroid" src="../img/profiles/mauricio-vega.jpg" alt="Mauricio Vega">
-              </a>
-            </li>
-            <li class="span1">
-            <a href="#" class="thumbnail" rel="tooltip" title="Stacey Wetzel">
-                <img class="img-polaroid" src="../img/profiles/stacey-wetzel.jpg" alt="Stacey Wetzel">
-              </a>
-            </li>
-          </ul>
-        </div>
-        <!-- thumbnails -->
+					<div class="row">
+						<div class="span3">
+							<address>
+								87 Richardson Street
+								<br>
+								2nd Floor
+								<br>
+								Brooklyn, NY 11211
+								<br>
+								(718) 389 6361
+							</address>
+						</div>
+						<div class="span4">
+							<address>
+								42 Redchurch St
+								<br>
+								London E2 7DP
+								<br>
+								(20) 7739 8172
+							</address>
+						</div>
+					</div>
+					<!-- contact -->
+				</div>
+				<!-- second row -->
 
-      </div>
-      <!-- second row -->
+			</div>
 
-    </div>
-    <!-- container -->
 
-  </body>
+
+		</div>
+
+		<script src="//use.typekit.net/fqb2cja.js"></script>
+		<script src="//code.jquery.com/jquery.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+		<script>try{Typekit.load();}catch(e) {}</script>
+		<script>
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-12537845-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				$('.thumbnail').tooltip();
+				$('.thumbnails li:nth-child(10) img').addClass('rotate');
+			});
+		</script>
+	</body>
 </html>

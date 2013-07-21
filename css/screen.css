@@ -1,0 +1,24 @@
+body {
+	font-family: "proxima-nova", sans-serif;
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+.logo-wrapper {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	background-image: url("/img/bg.jpg");
+	background-size: 320px 240px;
+	box-shadow: inset 0 0 300px #888;
+}
+
+.navbar-inner {
+	background: #000;
+}
+
+
+
+
