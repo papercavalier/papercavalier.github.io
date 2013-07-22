@@ -31,8 +31,11 @@ $(function() {
 
 		$viewport: $(window),
 
+    $footer: $('.site-footer'),
+
 		fillViewport: function() {
-			this.$el.height(this.$viewport.height());
+      console.log(parseInt(this.$footer.css('height')));
+			this.$el.height(this.$viewport.height() - parseInt(this.$footer.css('height')));
 		},
 	}
 
