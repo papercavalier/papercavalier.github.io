@@ -7,7 +7,7 @@ $(function() {
 		},
 
 		build: function() {
-			var count = Math.floor((new Date("2014-12-01") - new Date()) / 1000);
+			var count = Math.floor((new Date("2014-03-01") - new Date()) / 1000);
 			var vals = [
 				Math.floor(count / 86400),
 				this.pad(Math.floor(count % 86400 / 3600)),
