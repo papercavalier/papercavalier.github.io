@@ -21,10 +21,7 @@ $(function() {
 		pad: function(str) {
 			return ('0' + str).slice(-2);
 		}
-	}
-
-	counter.refresh();
-	setInterval(function() { counter.refresh() }, 1000);
+	};
 
 	var wrapper = {
 		$el: $('.wrapper'),
@@ -37,7 +34,7 @@ $(function() {
       console.log(parseInt(this.$footer.css('height')));
 			this.$el.height(this.$viewport.height() - parseInt(this.$footer.css('height')));
 		},
-	}
+	};
 
 	wrapper.fillViewport();
 	$(window).resize(function() { wrapper.fillViewport(); });
